@@ -2,6 +2,7 @@ import React from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 import { useAchievements } from '../contexts/AchievementContext'
 import { useSequenceState } from '../hooks/useSequenceState'
+import AssociationComponent from '../components/AssociationComponent'
 import MigrationComponent from '../components/MigrationComponent'
 import BucketComponent from '../components/BucketComponent'
 import ProgressBar from '../components/ProgressBar'
@@ -9,9 +10,9 @@ import ProgressBar from '../components/ProgressBar'
 const SequencePage = () => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const { checkActivityCompletion, checkSequenceCompletion } = useAchievements()
-  
+
   const activities = theme.content.sequence.activities
-  
+
   const {
     currentActivityIndex,
     scores,
@@ -23,33 +24,43 @@ const SequencePage = () => {
     handleRestartSequence,
     getScoreMessage,
   } = useSequenceState(activities, theme)
-
+      
   // Enhanced activity completion handler that includes achievement checks
   const handleActivityComplete = (score) => {
     // Check for activity achievements
     const isFirstAttempt = !scores[currentActivity.id]
     checkActivityCompletion(currentActivity.id, score, currentActivity.maxScore, isFirstAttempt)
-    
+      
     // Call the original handler
     originalHandleActivityComplete(score)
-    
+
     // Check for sequence completion achievements
     if (currentActivityIndex === activities.length - 1) {
       // This is the last activity, check sequence achievements
       const finalScore = Object.values({ ...scores, [currentActivity.id]: score }).reduce((sum, s) => sum + (s || 0), 0)
       const hasCompletedBefore = localStorage.getItem('sequenceCompletedBefore')
       const isRetry = !!hasCompletedBefore
-      
+    
       checkSequenceCompletion(finalScore, theme.content.sequence.conclusion.totalMaxScore, isRetry)
-      
+
       // Mark that sequence has been completed at least once
       localStorage.setItem('sequenceCompletedBefore', 'true')
-    }
   }
+    }
 
   // Afficher l'activité en cours
   if (showActivity) {
-    if (currentActivity.id === 'migration') {
+    if (currentActivity.id === 'association') {
+      return (
+        <AssociationComponent 
+          onComplete={handleActivityComplete}
+          currentIndex={currentActivityIndex}
+          totalItems={activities.length}
+          totalScore={totalScore}
+          maxScore={theme.content.sequence.conclusion.totalMaxScore}
+        />
+      )
+    } else if (currentActivity.id === 'migration') {
       return (
         <MigrationComponent 
           onComplete={handleActivityComplete}

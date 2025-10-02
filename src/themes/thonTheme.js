@@ -68,6 +68,35 @@ export const thonTheme = {
         africa: 'Afrique'
       }
     },
+    association: {
+      title: 'Associations du Thon 🐟🔗',
+      subtitle: 'Associez les éléments liés au thon pour découvrir ses caractéristiques.',
+      items: [
+        { id: 1, name: 'Océan Atlantique', icon: '🌊' },
+        { id: 2, name: 'Migration', icon: '🗺️' },
+        { id: 3, name: 'Plancton', icon: '🦠' },
+        { id: 4, name: 'Sardines', icon: '🐟' },
+        { id: 5, name: 'Température', icon: '🌡️' },
+        { id: 6, name: 'Vitesse', icon: '⚡' }
+      ],
+      associations: [
+        {
+          item1: { id: 1, name: 'Océan Atlantique', icon: '🌊' },
+          item2: { id: 2, name: 'Migration', icon: '🗺️' },
+          explanation: 'Le thon migre dans l\'océan Atlantique selon les saisons.'
+        },
+        {
+          item1: { id: 3, name: 'Plancton', icon: '🦠' },
+          item2: { id: 4, name: 'Sardines', icon: '🐟' },
+          explanation: 'Les jeunes thons mangent du plancton, les adultes chassent les sardines.'
+        },
+        {
+          item1: { id: 5, name: 'Température', icon: '🌡️' },
+          item2: { id: 6, name: 'Vitesse', icon: '⚡' },
+          explanation: 'La température de l\'eau influence la vitesse de nage du thon.'
+        }
+      ]
+    },
     bucket: {
       title: 'Alimentation du Thon 🐟🍽️',
       subtitle: 'Découvrez les différences d\'alimentation entre les jeunes et les adultes thons.',
@@ -133,6 +162,14 @@ export const thonTheme = {
       subtitle: 'Parcourez les activités dans l\'ordre pour découvrir tous les secrets du thon !',
       activities: [
         {
+          id: 'association',
+          title: 'Associations du Thon',
+          description: 'Associez les éléments liés au thon pour découvrir ses caractéristiques.',
+          icon: '🔗',
+          path: '/association',
+          maxScore: 3
+        },
+        {
           id: 'migration',
           title: 'Migration du Thon',
           description: 'Découvrez les mystères de la migration',
@@ -152,7 +189,7 @@ export const thonTheme = {
       conclusion: {
         title: 'Félicitations ! 🎉',
         subtitle: 'Vous avez terminé la séquence d\'apprentissage du thon !',
-        totalMaxScore: 8,
+        totalMaxScore: 11,
         messages: {
           perfect: 'Parfait ! Vous êtes un véritable expert du thon !',
           excellent: 'Excellent ! Vous connaissez très bien le thon !',

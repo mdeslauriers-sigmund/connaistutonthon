@@ -47,6 +47,18 @@
     - Lorsque la réponse est bonne, on affiche un message de succès
     - Lorsque la réponse est mauvaise, on affiche un message de d'échec
 
+### Association component
+- Permet à l'utilisateur d'associer une technique de pêche à une conséquence pour l'environnement
+  - On lui demande d'associer une technique de pêche dans une liste, à une conséquence dans une 2ème liste
+  - Chaque item d'une liste peut avoir plusieurs correspondances dans l'autre liste
+  - L'utilisateur clique sur le premier item en garde son bouton de souris enfoncé, puis déplace son curseur sur le second item et relâche le bouton
+  - Lorsqu'il le relâche on affiche un trait entre les 2 items
+    - Lors de la sélection de la réponse, on affiche une explication
+    - Lorsque la réponse est bonne, on affiche un message de succès
+      - Le trait entre les 2 boites est vert
+    - Lorsque la réponse est mauvaise, on affiche un message de d'échec
+      - Le trait entre les 2 boites est rouge
+
 ### Achievements
 - Permet à l'utilisateur de gagner des badges lors de diverses actions
   - Les badges font partie d'une liste prédéterminée
