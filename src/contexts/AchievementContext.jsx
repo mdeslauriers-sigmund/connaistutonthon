@@ -78,6 +78,10 @@ export const AchievementProvider = ({ children }) => {
     achievementManager.checkThemeChange()
   }, [])
 
+  const checkBigInJapan = useCallback((areaId) => {
+    achievementManager.checkBigInJapan(areaId)
+  }, [])
+
   // Reset all achievements (for testing)
   const resetAchievements = useCallback(() => {
     achievementManager.resetAll()
@@ -93,7 +97,8 @@ export const AchievementProvider = ({ children }) => {
     checkActivityCompletion,
     checkSequenceCompletion,
     checkThemeChange,
-    resetAchievements
+    resetAchievements,
+    checkBigInJapan
   }
 
   return (

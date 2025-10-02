@@ -3,6 +3,7 @@ import { useThemeConfig } from '../hooks/useThemeConfig'
 import WorldMap from './WorldMap'
 import ProgressBar from './ProgressBar'
 import FishTransition from './FishTransition'
+import { useAchievements } from '../contexts/AchievementContext'
 
 const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, totalScore = 0, maxScore = 8 }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
@@ -11,10 +12,15 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
   const [showResult, setShowResult] = useState(false)
   const [score, setScore] = useState(0)
   const [showFishTransition, setShowFishTransition] = useState(false)
+  const { checkBigInJapan } = useAchievements()
 
   const questions = theme.content.migration.questions
 
   const handleAreaSelect = (areaId) => {
+    // objectif caché
+    checkBigInJapan(areaId);
+    if(areaId === 'japan') return;
+    
     if (showResult) return
 
     setSelectedArea(areaId)
