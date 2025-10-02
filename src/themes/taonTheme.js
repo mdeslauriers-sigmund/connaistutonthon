@@ -1,6 +1,8 @@
+import tournesolsImage from '../assets/img/tournesols.png'
 export const taonTheme = {
   name: 'Taon',
   icon: 'bee',
+  backgroundImage: tournesolsImage,
   colors: {
     primary: 'bee-gold',
     secondary: 'bee-yellow',

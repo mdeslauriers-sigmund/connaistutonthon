@@ -1,6 +1,8 @@
+import bancThonImage from '../assets/img/banc-thon.jpg'
 export const thonTheme = {
   name: 'Thon',
   icon: 'tuna',
+  backgroundImage: bancThonImage,
   colors: {
     primary: 'tuna-blue',
     secondary: 'tuna-light',
