@@ -64,7 +64,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
     const totalPlaced = newContainers.adults.length + newContainers.young.length
     if (totalPlaced === totalFoods) {
       setGameCompleted(true)
-      
+
       // Débloquer l'achievement "Le Cocothon" si tous les items sont dans le même panier
       if (newContainers.adults.length === totalFoods || newContainers.young.length === totalFoods) {
         unlockAchievement('le_cocothon')
@@ -167,7 +167,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
             style={{
               backgroundImage: `url(${theme.basketImage})`,
             }}></div>
-          <div class="relative">
+          <div className="relative">
             <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
               {theme.content.bucket.containers.adults.title}
             </h3>
@@ -219,7 +219,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
             style={{
               backgroundImage: `url(${theme.basketImage})`,
             }}></div>
-          <div class="relative">
+          <div className="relative">
             <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
               {theme.content.bucket.containers.young.title}
             </h3>

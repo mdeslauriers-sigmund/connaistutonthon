@@ -3,8 +3,9 @@ import { useThemeConfig } from '../hooks/useThemeConfig'
 import Icon from '../components/Icon'
 
 
+
 const HomePage = () => {
-  const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
+  const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses, getBackgroundClasses } = useThemeConfig()
 
   return (
     <div
@@ -31,7 +32,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="relative z-10 bg-ocean-deep py-12 px-4 sm:px-6 lg:px-16 text-center">
+      <div className={`relative z-10 py-12 px-4 sm:px-6 lg:px-16 text-center ${getBackgroundClasses()}`}>
         {/* hero */}
         <div className="py-12 opacity-80">
           <h2 className={`text-4xl md:text-6xl font-normal mb-4 transition-colors duration-500 text-${getTextColor()} font-molle`}>
