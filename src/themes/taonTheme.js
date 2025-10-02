@@ -68,6 +68,35 @@ export const taonTheme = {
         africa: 'Afrique'
       }
     },
+    association: {
+      title: 'Associations des Taons 🐝🔗',
+      subtitle: 'Associez les éléments liés aux taons pour découvrir leurs caractéristiques.',
+      items: [
+        { id: 1, name: 'Fleurs', icon: '🌸' },
+        { id: 2, name: 'Pollinisation', icon: '🌺' },
+        { id: 3, name: 'Nectar', icon: '🍯' },
+        { id: 4, name: 'Pollen', icon: '🌼' },
+        { id: 5, name: 'Saison', icon: '🌞' },
+        { id: 6, name: 'Vol', icon: '🦋' }
+      ],
+      associations: [
+        {
+          item1: { id: 1, name: 'Fleurs', icon: '🌸' },
+          item2: { id: 2, name: 'Pollinisation', icon: '🌺' },
+          explanation: 'Les taons pollinisent les fleurs en se déplaçant de fleur en fleur.'
+        },
+        {
+          item1: { id: 3, name: 'Nectar', icon: '🍯' },
+          item2: { id: 4, name: 'Pollen', icon: '🌼' },
+          explanation: 'Les taons collectent le nectar et transportent le pollen.'
+        },
+        {
+          item1: { id: 5, name: 'Saison', icon: '🌞' },
+          item2: { id: 6, name: 'Vol', icon: '🦋' },
+          explanation: 'L\'activité des taons varie selon les saisons et leur capacité de vol.'
+        }
+      ]
+    },
     bucket: {
       title: 'Alimentation des Taons 🐝🌸',
       subtitle: 'Découvrez les différences d\'alimentation entre les jeunes et les adultes taons.',
@@ -133,6 +162,14 @@ export const taonTheme = {
       subtitle: 'Parcourez les activités dans l\'ordre pour découvrir tous les secrets des taons !',
       activities: [
         {
+          id: 'association',
+          title: 'Associations des Taons',
+          description: 'Associez les éléments liés aux taons pour découvrir leurs caractéristiques.',
+          icon: '🔗',
+          path: '/association',
+          maxScore: 3
+        },
+        {
           id: 'migration',
           title: 'Migration des Taons',
           description: 'Découvrez les mystères de la migration',
@@ -152,7 +189,7 @@ export const taonTheme = {
       conclusion: {
         title: 'Félicitations ! 🎉',
         subtitle: 'Vous avez terminé la séquence d\'apprentissage des taons !',
-        totalMaxScore: 8,
+        totalMaxScore: 11,
         messages: {
           perfect: 'Parfait ! Vous êtes un véritable expert des taons !',
           excellent: 'Excellent ! Vous connaissez très bien les taons !',

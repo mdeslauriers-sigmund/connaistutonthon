@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import AssociationComponent from '../components/AssociationComponent'
 import MigrationComponent from '../components/MigrationComponent'
 import BucketComponent from '../components/BucketComponent'
 import ProgressBar from '../components/ProgressBar'
@@ -99,7 +100,17 @@ const SequencePage = () => {
 
   // Afficher l'activité en cours
   if (showActivity) {
-    if (currentActivity.id === 'migration') {
+    if (currentActivity.id === 'association') {
+      return (
+        <AssociationComponent 
+          onComplete={handleActivityComplete}
+          currentIndex={currentActivityIndex}
+          totalItems={activities.length}
+          totalScore={totalScore}
+          maxScore={theme.content.sequence.conclusion.totalMaxScore}
+        />
+      )
+    } else if (currentActivity.id === 'migration') {
       return (
         <MigrationComponent 
           onComplete={handleActivityComplete}
