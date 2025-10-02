@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 import Icon from '../components/Icon'
 
+
 const HomePage = () => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
 

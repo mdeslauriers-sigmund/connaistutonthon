@@ -1,12 +1,12 @@
-import fishIconUrl from '../assets/icons/fish.svg'
 import beeIconUrl from '../assets/icons/bee.svg'
 import tunaIconUrl from '../assets/icons/tuna.svg'
+import tunaBlueIconUrl from '../assets/icons/tuna-blue.svg'
 
 const Icon = ({ name, className = '', size = 'w-8 h-8', ...props }) => {
   const iconMap = {
-    fish: fishIconUrl,
     tuna: tunaIconUrl,
     bee: beeIconUrl,
+    tunaBlue: tunaBlueIconUrl,
   }
 
   const iconUrl = iconMap[name]
