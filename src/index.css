@@ -25,3 +25,7 @@ body {
     transform: rotate(-5deg) scaleX(-1);
   }
 }
+
+.text-wave-light {
+  color: #e0f2fe;
+}

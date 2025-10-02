@@ -85,9 +85,9 @@ const SequencePage = () => {
 
   if (isCompleted) {
     return (
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-white">
         <div className="text-center">
-          <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()} font-molle`}>
+          <h1 className={`text-4xl md:text-5xl font-normal mb-6 text-${getTextColor()} font-molle`}>
             {theme.content.sequence.conclusion.title}
           </h1>
           <p className={`text-xl mb-8 text-${getTextSecondaryColor()}`}>

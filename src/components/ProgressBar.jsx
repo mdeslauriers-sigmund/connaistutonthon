@@ -3,7 +3,9 @@ import { useThemeConfig } from '../hooks/useThemeConfig'
 const ProgressBar = ({ currentIndex, totalItems, currentActivity, totalScore, maxScore }) => {
   const { getTextColor, getCardClasses, theme } = useThemeConfig()
 
-  const progressPercentage = ((currentIndex + 1) / totalItems) * 100
+  // Show 90% when reaching the last step, otherwise normal calculation
+  const isLastStep = currentIndex === totalItems - 1
+  const progressPercentage = isLastStep ? 94 : ((currentIndex + 1) / totalItems) * 100
 
   return (
     <div className="mb-8 flex gap-8 items-end">
@@ -45,9 +47,17 @@ const ProgressBar = ({ currentIndex, totalItems, currentActivity, totalScore, ma
           </div>
         </div>
 
-        <span className={`sr-only`}>
-          {currentIndex + 1}/{totalItems}
-        </span>
+        {/* Progress indicator */}
+        <div className="sr-only">
+          <span className={`text-sm font-medium text-${getTextColor()}`}>
+            {currentIndex + 1}/{totalItems}
+          </span>
+          {isLastStep && (
+            <span className="text-xs text-yellow-400 animate-pulse">
+              Presque arrivé ! 🎯
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Score section with theme-appropriate icon */}
