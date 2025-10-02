@@ -25,13 +25,16 @@ const ActivityPage = () => {
           
           <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20">
             <div className="text-5xl mb-4">🌊</div>
-            <h3 className="text-2xl font-semibold text-white mb-4">Exploration Marine</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Migration du Thon</h3>
             <p className="text-wave-light mb-6">
-              Explorez les océans et découvrez l'écosystème du thon en 3D.
+              Découvrez les mystères de la migration du thon à travers les saisons.
             </p>
-            <button className="bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200">
-              Explorer
-            </button>
+            <Link 
+              to="/migration"
+              className="inline-block bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200"
+            >
+              Explorer la Migration
+            </Link>
           </div>
         </div>
         
