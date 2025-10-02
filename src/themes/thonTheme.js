@@ -1,6 +1,6 @@
 export const thonTheme = {
   name: 'Thon',
-  icon: '🐟',
+  icon: 'tuna',
   colors: {
     primary: 'tuna-blue',
     secondary: 'tuna-light',

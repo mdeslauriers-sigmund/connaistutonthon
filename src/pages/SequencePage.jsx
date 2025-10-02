@@ -24,13 +24,13 @@ const SequencePage = () => {
     handleRestartSequence,
     getScoreMessage,
   } = useSequenceState(activities, theme)
-      
+
   // Enhanced activity completion handler that includes achievement checks
   const handleActivityComplete = (score) => {
     // Check for activity achievements
     const isFirstAttempt = !scores[currentActivity.id]
     checkActivityCompletion(currentActivity.id, score, currentActivity.maxScore, isFirstAttempt)
-      
+
     // Call the original handler
     originalHandleActivityComplete(score)
 
@@ -40,19 +40,19 @@ const SequencePage = () => {
       const finalScore = Object.values({ ...scores, [currentActivity.id]: score }).reduce((sum, s) => sum + (s || 0), 0)
       const hasCompletedBefore = localStorage.getItem('sequenceCompletedBefore')
       const isRetry = !!hasCompletedBefore
-    
+
       checkSequenceCompletion(finalScore, theme.content.sequence.conclusion.totalMaxScore, isRetry)
 
       // Mark that sequence has been completed at least once
       localStorage.setItem('sequenceCompletedBefore', 'true')
-  }
     }
+  }
 
   // Afficher l'activité en cours
   if (showActivity) {
     if (currentActivity.id === 'association') {
       return (
-        <AssociationComponent 
+        <AssociationComponent
           onComplete={handleActivityComplete}
           currentIndex={currentActivityIndex}
           totalItems={activities.length}
@@ -62,7 +62,7 @@ const SequencePage = () => {
       )
     } else if (currentActivity.id === 'migration') {
       return (
-        <MigrationComponent 
+        <MigrationComponent
           onComplete={handleActivityComplete}
           currentIndex={currentActivityIndex}
           totalItems={activities.length}
@@ -72,7 +72,7 @@ const SequencePage = () => {
       )
     } else if (currentActivity.id === 'bucket') {
       return (
-        <BucketComponent 
+        <BucketComponent
           onComplete={handleActivityComplete}
           currentIndex={currentActivityIndex}
           totalItems={activities.length}
@@ -87,7 +87,7 @@ const SequencePage = () => {
     return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center">
-          <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()}`}>
+          <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()} font-molle`}>
             {theme.content.sequence.conclusion.title}
           </h1>
           <p className={`text-xl mb-8 text-${getTextSecondaryColor()}`}>
@@ -154,7 +154,7 @@ const SequencePage = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-8">
-        <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()}`}>
+        <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()} font-molle`}>
           {theme.content.sequence.title}
         </h1>
         <p className={`text-xl mb-8 text-${getTextSecondaryColor()}`}>
@@ -163,7 +163,7 @@ const SequencePage = () => {
       </div>
 
       {/* Progression */}
-      <ProgressBar 
+      <ProgressBar
         currentIndex={currentActivityIndex}
         totalItems={activities.length}
         currentActivity={currentActivity}

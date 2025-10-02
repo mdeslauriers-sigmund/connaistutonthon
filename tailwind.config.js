@@ -6,13 +6,16 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'molle': ['Molle', 'cursive'],
+      },
       colors: {
         // Thème Océan (Thon)
         'tuna-blue': '#1e40af',
         'tuna-light': '#3b82f6',
         'ocean-deep': '#0f172a',
         'wave-light': '#e0f2fe',
-        
+
         // Thème Abeille (Nouveau)
         'bee-yellow': '#fbbf24',
         'bee-gold': '#f59e0b',

@@ -76,7 +76,7 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-8">
-        <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()}`}>
+        <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()} font-molle`}>
           {theme.content.migration.title}
         </h1>
         <p className={`text-xl mb-8 max-w-3xl mx-auto text-${getTextSecondaryColor()}`}>

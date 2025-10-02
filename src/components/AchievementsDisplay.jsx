@@ -8,7 +8,7 @@ import { useThemeConfig } from '../hooks/useThemeConfig'
 const AchievementsDisplay = ({ compact = false }) => {
   const { getAllAchievements, isAchievementUnlocked, getProgress } = useAchievements()
   const { getTextColor, getTextSecondaryColor, getCardClasses } = useThemeConfig()
-  
+
   const allAchievements = getAllAchievements()
   const progress = getProgress()
 
@@ -43,11 +43,11 @@ const AchievementsDisplay = ({ compact = false }) => {
             {progress.unlocked}/{progress.total}
           </div>
         </div>
-        
+
         {/* Progress Bar */}
         <div className="mb-4">
           <div className="w-full bg-gray-700 rounded-full h-2">
-            <div 
+            <div
               className="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full transition-all duration-500"
               style={{ width: `${progress.percentage}%` }}
             />
@@ -67,8 +67,8 @@ const AchievementsDisplay = ({ compact = false }) => {
                 className={`
                   aspect-square rounded-lg flex items-center justify-center text-3xl
                   transition-all duration-300
-                  ${unlocked 
-                    ? 'bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border-2 border-yellow-500/50 shadow-lg' 
+                  ${unlocked
+                    ? 'bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border-2 border-yellow-500/50 shadow-lg'
                     : 'bg-gray-800/50 border-2 border-gray-700 opacity-30 grayscale'
                   }
                 `}
@@ -87,7 +87,7 @@ const AchievementsDisplay = ({ compact = false }) => {
     <div className="space-y-6">
       {/* Header */}
       <div className="text-center">
-        <h2 className={`text-3xl font-bold mb-2 text-${getTextColor()}`}>
+        <h2 className={`text-3xl font-bold mb-2 text-${getTextColor()} font-molle`}>
           🏆 Achievements
         </h2>
         <p className={`text-${getTextSecondaryColor()}`}>
@@ -110,11 +110,11 @@ const AchievementsDisplay = ({ compact = false }) => {
             {progress.percentage === 100 ? '🏆' : '📊'}
           </div>
         </div>
-        
+
         {/* Progress Bar */}
         <div className="relative">
           <div className="w-full bg-gray-700 rounded-full h-4">
-            <div 
+            <div
               className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 h-4 rounded-full transition-all duration-500"
               style={{ width: `${progress.percentage}%` }}
             />
@@ -131,19 +131,19 @@ const AchievementsDisplay = ({ compact = false }) => {
           <h3 className={`text-xl font-bold mb-4 text-${getTextColor()}`}>
             {categoryLabels[category] || category}
           </h3>
-          
+
           <div className="grid md:grid-cols-2 gap-4">
             {achievements.map(achievement => {
               const unlocked = isAchievementUnlocked(achievement.id)
-              
+
               return (
                 <div
                   key={achievement.id}
                   className={`
                     ${getCardClasses()} p-4
                     transition-all duration-300
-                    ${unlocked 
-                      ? 'bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border-2 border-yellow-500/30' 
+                    ${unlocked
+                      ? 'bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border-2 border-yellow-500/30'
                       : 'opacity-50'
                     }
                   `}
@@ -155,7 +155,7 @@ const AchievementsDisplay = ({ compact = false }) => {
                     `}>
                       {unlocked ? achievement.icon : '🔒'}
                     </div>
-                    
+
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
                         <h4 className={`font-bold text-${getTextColor()}`}>

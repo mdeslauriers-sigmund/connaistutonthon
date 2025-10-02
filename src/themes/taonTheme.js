@@ -1,6 +1,6 @@
 export const taonTheme = {
   name: 'Taon',
-  icon: '🐝',
+  icon: 'bee',
   colors: {
     primary: 'bee-gold',
     secondary: 'bee-yellow',

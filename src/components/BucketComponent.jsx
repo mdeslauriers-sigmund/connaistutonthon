@@ -28,20 +28,20 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
 
   const handleDrop = (e, category) => {
     e.preventDefault()
-    
+
     if (!draggedItem) return
 
     const isCorrect = draggedItem.correctCategory === category
     const newContainers = { ...containers }
-    
+
     // Retirer l'item de son ancien conteneur s'il y en a un
     Object.keys(newContainers).forEach(key => {
       newContainers[key] = newContainers[key].filter(item => item.id !== draggedItem.id)
     })
-    
+
     // Ajouter l'item au nouveau conteneur
     newContainers[category].push(draggedItem)
-    
+
     setContainers(newContainers)
     setShowResult({
       food: draggedItem,
@@ -55,7 +55,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
     }
 
     setDraggedItem(null)
-    
+
     // Vérifier automatiquement si tous les items sont placés
     const totalPlaced = newContainers.adults.length + newContainers.young.length
     if (totalPlaced === totalFoods) {
@@ -91,7 +91,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
       const timer = setTimeout(() => {
         onComplete(score)
       }, 3000)
-      
+
       return () => clearTimeout(timer)
     }
   }, [gameCompleted, score, onComplete])
@@ -106,7 +106,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* ProgressBar */}
-      <ProgressBar 
+      <ProgressBar
         currentIndex={currentIndex}
         totalItems={totalItems}
         currentActivity={currentActivity}
@@ -115,7 +115,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
       />
 
       <div className="text-center mb-8">
-        <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()}`}>
+        <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()} font-molle`}>
           {theme.content.bucket.title}
         </h1>
         <p className={`text-xl mb-8 max-w-3xl mx-auto text-${getTextSecondaryColor()}`}>
@@ -152,7 +152,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
       {/* Conteneurs */}
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         {/* Conteneur Adultes */}
-        <div 
+        <div
           className={`${getCardClasses()} min-h-[300px] transition-all duration-300 ${theme.content.bucket.containers.adults.color}`}
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'adults')}
@@ -165,7 +165,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
           </p>
           <div className="grid grid-cols-2 gap-2">
             {containers.adults.map((food) => (
-              <div 
+              <div
                 key={food.id}
                 className={`${getCardClasses()} p-3 text-center`}
               >
@@ -177,7 +177,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
         </div>
 
         {/* Conteneur Jeunes */}
-        <div 
+        <div
           className={`${getCardClasses()} min-h-[300px] transition-all duration-300 ${theme.content.bucket.containers.young.color}`}
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'young')}
@@ -190,7 +190,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
           </p>
           <div className="grid grid-cols-2 gap-2">
             {containers.young.map((food) => (
-              <div 
+              <div
                 key={food.id}
                 className={`${getCardClasses()} p-3 text-center`}
               >
@@ -209,7 +209,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
         </h3>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
           {getRemainingFoods().map((food) => (
-            <div 
+            <div
               key={food.id}
               className={`${getCardClasses()} p-4 text-center cursor-move hover:scale-105 transition-transform`}
               draggable
@@ -231,7 +231,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
                 🎉 Jeu terminé !
               </h3>
               <p className={`text-lg mb-4 text-${getTextSecondaryColor()}`}>
-                Score final: {score}/{totalFoods} ({Math.round((score/totalFoods) * 100)}%)
+                Score final: {score}/{totalFoods} ({Math.round((score / totalFoods) * 100)}%)
               </p>
               <p className={`text-sm text-${getTextSecondaryColor()}`}>
                 Passage automatique à l'activité suivante...
