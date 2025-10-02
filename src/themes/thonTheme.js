@@ -39,21 +39,21 @@ export const thonTheme = {
     ],
     footer: 'Découvrez le monde fascinant du thon',
     migration: {
-      title: 'Migration du Thon 🐟🌊',
+      title: 'Migration du Thon rouge de l\'Atlantique ouest 🐟🌊',
       subtitle: 'Découvrez les mystères de la migration du thon de l\'Atlantique à travers les saisons.',
       questions: [
         {
           id: 0,
           season: 'été',
-          correctAnswer: { x: 60, y: 40 },
-          explanation: 'En été, le thon de l\'Atlantique se trouve dans les eaux plus froides du nord, près des côtes canadiennes et européennes, où la nourriture est abondante.',
+          correctAnswer: { area: 'atlantic-west' },
+          explanation: 'En été, le thon rouge de l\'Atlantique ouest se trouve dans les eaux plus froides du nord, près des côtes canadiennes, où la nourriture est abondante.',
           successMessage: 'Excellent ! En été, le thon migre vers les eaux plus froides du nord.',
           failureMessage: 'Pas tout à fait ! En été, le thon préfère les eaux plus fraîches du nord.'
         },
         {
           id: 1,
           season: 'hiver',
-          correctAnswer: { x: 30, y: 60 },
+          correctAnswer: { area: 'mexico-golfe' },
           explanation: 'En hiver, le thon de l\'Atlantique migre vers les eaux plus chaudes du sud, près des Caraïbes et de l\'Afrique de l\'Ouest.',
           successMessage: 'Parfait ! En hiver, le thon se dirige vers les eaux plus chaudes du sud.',
           failureMessage: 'Pas correct ! En hiver, le thon migre vers les eaux plus chaudes du sud.'
