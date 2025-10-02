@@ -83,16 +83,16 @@ export const thonTheme = {
           season: 'été',
           correctAnswer: { area: 'atlantic-west' },
           explanation: 'En été, le thon rouge de l\'Atlantique ouest se trouve dans les eaux plus froides du nord, près des côtes canadiennes, où la nourriture est abondante.',
-          successMessage: 'Excellent ! En été, le thon migre vers les eaux plus froides du nord.',
-          failureMessage: 'Pas tout à fait ! En été, le thon préfère les eaux plus fraîches du nord.'
+          successMessage: 'Excellent ! En été, le thon migre vers les eaux plus froides du nord, parce que c\'est là où la nourriture est abondante.',
+          failureMessage: 'Pas tout à fait ! En été, le thon préfère les eaux plus fraîches du nord, parce que c\'est là où la nourriture est abondante.'
         },
         {
           id: 1,
           season: 'hiver',
           correctAnswer: { area: 'mexico-golfe' },
-          explanation: 'En hiver, le thon de l\'Atlantique migre vers les eaux plus chaudes du sud, près des Caraïbes et de l\'Afrique de l\'Ouest.',
-          successMessage: 'Parfait ! En hiver, le thon se dirige vers les eaux plus chaudes du sud.',
-          failureMessage: 'Pas correct ! En hiver, le thon migre vers les eaux plus chaudes du sud.'
+          explanation: 'En hiver, le thon de l\'Atlantique migre vers les eaux plus chaudes du sud, dans le golfe du Mexique.',
+          successMessage: 'Parfait ! En hiver, le thon se dirige vers les eaux plus chaudes du sud, car c\'est la conditoin propice à sa reproduction.',
+          failureMessage: 'Pas correct ! En hiver, le thon migre vers les eaux plus chaudes du sud, car c\'est la conditoin propice à sa reproduction.'
         }
       ],
       mapTitle: 'Carte de l\'Atlantique',
