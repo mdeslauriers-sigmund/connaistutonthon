@@ -19,8 +19,8 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
   const handleAreaSelect = (areaId) => {
     // objectif caché
     checkBigInJapan(areaId);
-    if(areaId === 'japan') return;
-    
+    if (areaId === 'japan') return;
+
     if (showResult) return
 
     setSelectedArea(areaId)
@@ -89,8 +89,17 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
+      {/* ProgressBar */}
+      <ProgressBar
+        currentIndex={currentIndex}
+        totalItems={totalItems}
+        currentActivity={currentActivity}
+        totalScore={totalScore}
+        maxScore={maxScore}
+      />
+
       <div className="text-center mb-8">
-        <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()} font-molle`}>
+        <h1 className={`text-4xl md:text-5xl font-normal max-w-3xl mx-auto mb-6 text-${getTextColor()} font-molle`}>
           {theme.content.migration.title}
         </h1>
         <p className={`text-xl mb-8 max-w-3xl mx-auto text-${getTextSecondaryColor()}`}>
@@ -124,14 +133,14 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
               isCorrect={isCorrect}
               theme={theme}
             />
-            
+
             {/* Result Overlay */}
             {showResult && (
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-4 pointer-events-none">
                 <div className={`pointer-events-auto max-w-lg w-full p-6 rounded-xl ${isCorrect ? 'bg-green-500/95 border-green-300' : 'bg-red-500/95 border-red-300'} border-2 shadow-2xl`}>
                   <div className="text-center text-white">
                     <div className="text-4xl mb-3">
-                      {isCorrect ? '🎉' : '❌'}
+                      {isCorrect ? '🎉' : '⚠'}
                     </div>
                     <p className="font-bold text-xl mb-3">
                       {isCorrect ? currentQ.successMessage : currentQ.failureMessage}
