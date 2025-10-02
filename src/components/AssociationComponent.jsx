@@ -8,9 +8,9 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
   const [showResult, setShowResult] = useState(null)
   const [score, setScore] = useState(0)
   const [gameCompleted, setGameCompleted] = useState(false)
+  const [remainingAssociations, setRemainingAssociations] = useState(theme.content.association.associations)
 
-  const associations = theme.content.association.associations
-  const totalAssociations = associations.length
+  const totalAssociations = theme.content.association.associations.length
 
   const handleItemClick = (item) => {
     if (gameCompleted) return
@@ -35,7 +35,7 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
     if (selectedItems.length !== 2) return
 
     const [item1, item2] = selectedItems
-    const association = associations.find(assoc => 
+    const association = remainingAssociations.find(assoc => 
       (assoc.item1.id === item1.id && assoc.item2.id === item2.id) ||
       (assoc.item1.id === item2.id && assoc.item2.id === item1.id)
     )
@@ -50,12 +50,12 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
     if (isCorrect) {
       setScore(score + 1)
       // Retirer les items associés de la liste
-      const remainingAssociations = associations.filter(assoc => 
+      const newRemainingAssociations = remainingAssociations.filter(assoc => 
         !((assoc.item1.id === item1.id && assoc.item2.id === item2.id) ||
           (assoc.item1.id === item2.id && assoc.item2.id === item1.id))
       )
       // Mettre à jour les associations disponibles
-      theme.content.association.associations = remainingAssociations
+      setRemainingAssociations(newRemainingAssociations)
     }
 
     setSelectedItems([])
@@ -71,13 +71,21 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
     setShowResult(null)
     setScore(0)
     setGameCompleted(false)
+    setRemainingAssociations(theme.content.association.associations)
   }
 
   const getAvailableItems = () => {
-    const usedItems = associations.flatMap(assoc => [assoc.item1, assoc.item2])
+    const usedItems = remainingAssociations.flatMap(assoc => [assoc.item1, assoc.item2])
     return theme.content.association.items.filter(item => 
-      !usedItems.some(used => used.id === item.id)
+      usedItems.some(used => used.id === item.id)
     )
+  }
+
+  const getColumnItems = () => {
+    const availableItems = getAvailableItems()
+    const column1 = availableItems.filter((_, index) => index % 2 === 0)
+    const column2 = availableItems.filter((_, index) => index % 2 === 1)
+    return { column1, column2 }
   }
 
   // Déclencher le passage automatique quand le jeu est terminé
@@ -150,22 +158,44 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
         <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
           Cliquez sur deux éléments pour les associer
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {getAvailableItems().map((item) => {
-            const isSelected = selectedItems.some(selected => selected.id === item.id)
-            return (
-              <div 
-                key={item.id}
-                className={`${getCardClasses()} p-4 text-center cursor-pointer hover:scale-105 transition-all duration-200 ${
-                  isSelected ? 'ring-4 ring-blue-400 bg-blue-100/20' : ''
-                }`}
-                onClick={() => handleItemClick(item)}
-              >
-                <div className="text-3xl mb-2">{item.icon}</div>
-                <div className={`text-sm font-semibold text-${getTextColor()}`}>{item.name}</div>
-              </div>
-            )
-          })}
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Colonne 1 */}
+          <div className="space-y-4">
+            {getColumnItems().column1.map((item) => {
+              const isSelected = selectedItems.some(selected => selected.id === item.id)
+              return (
+                <div 
+                  key={item.id}
+                  className={`${getCardClasses()} p-6 text-center cursor-pointer hover:scale-105 transition-all duration-200 ${
+                    isSelected ? 'ring-4 ring-blue-400 bg-blue-100/20' : ''
+                  }`}
+                  onClick={() => handleItemClick(item)}
+                >
+                  <div className="text-4xl mb-3">{item.icon}</div>
+                  <div className={`text-base font-semibold text-${getTextColor()}`}>{item.name}</div>
+                </div>
+              )
+            })}
+          </div>
+          
+          {/* Colonne 2 */}
+          <div className="space-y-4">
+            {getColumnItems().column2.map((item) => {
+              const isSelected = selectedItems.some(selected => selected.id === item.id)
+              return (
+                <div 
+                  key={item.id}
+                  className={`${getCardClasses()} p-6 text-center cursor-pointer hover:scale-105 transition-all duration-200 ${
+                    isSelected ? 'ring-4 ring-blue-400 bg-blue-100/20' : ''
+                  }`}
+                  onClick={() => handleItemClick(item)}
+                >
+                  <div className="text-4xl mb-3">{item.icon}</div>
+                  <div className={`text-base font-semibold text-${getTextColor()}`}>{item.name}</div>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
 
