@@ -24,7 +24,6 @@
 
 .fish-icon {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  /* Pas de scaleX, les poissons regardent naturellement vers la droite */
   transform: scaleX(-1); /* Inverser horizontalement pour regarder à gauche */
 }
 

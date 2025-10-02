@@ -131,15 +131,6 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
         </p>
       </div>
 
-      {/* Score et Progression */}
-      <div className="text-center mb-8">
-        <div className={`inline-block ${getCardClasses()} p-4`}>
-          <p className={`text-lg font-semibold text-${getTextColor()}`}>
-            Score: {score}/{totalFoods} | Progression: {containers.adults.length + containers.young.length}/{totalFoods}
-          </p>
-        </div>
-      </div>
-
       {/* Résultat */}
       {showResult && (
         <div className={`p-4 rounded-lg mb-6 mx-auto max-w-2xl ${showResult.isCorrect ? 'bg-green-500/20 border-green-500/50' : 'bg-red-500/20 border-red-500/50'} border`}>
@@ -157,11 +148,11 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
         </div>
       )}
 
-      {/* Conteneurs */}
-      <div className="grid md:grid-cols-2 gap-8 mb-8">
-        {/* Conteneur Adultes */}
+      {/* Layout à 3 colonnes : Bucket Gauche | Aliments (Centre) | Bucket Droit */}
+      <div className="grid md:grid-cols-[1fr_auto_1fr] gap-6 mb-8">
+        {/* Conteneur Adultes (Gauche) */}
         <div
-          className={`${getCardClasses()} min-h-[300px] transition-all duration-300 ${theme.content.bucket.containers.adults.color}`}
+          className={`${getCardClasses()} min-h-[400px] transition-all duration-300 ${theme.content.bucket.containers.adults.color}`}
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'adults')}
         >
@@ -184,9 +175,29 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
           </div>
         </div>
 
-        {/* Conteneur Jeunes */}
+        {/* Aliments à classer (Centre) */}
+        <div className="flex flex-col items-center justify-start min-w-[280px] max-w-[320px]">
+          <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
+            Aliments à classer
+          </h3>
+          <div className="grid grid-cols-2 gap-3 w-full">
+            {getRemainingFoods().map((food) => (
+              <div
+                key={food.id}
+                className={`${getCardClasses()} p-4 text-center cursor-move hover:scale-105 transition-transform`}
+                draggable
+                onDragStart={(e) => handleDragStart(e, food)}
+              >
+                <div className="text-3xl mb-2">{food.image}</div>
+                <div className={`text-sm font-semibold text-${getTextColor()}`}>{food.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Conteneur Jeunes (Droit) */}
         <div
-          className={`${getCardClasses()} min-h-[300px] transition-all duration-300 ${theme.content.bucket.containers.young.color}`}
+          className={`${getCardClasses()} min-h-[400px] transition-all duration-300 ${theme.content.bucket.containers.young.color}`}
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'young')}
         >
@@ -210,23 +221,12 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
         </div>
       </div>
 
-      {/* Aliments à placer */}
-      <div className="mb-8">
-        <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
-          Aliments à classer
-        </h3>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-          {getRemainingFoods().map((food) => (
-            <div
-              key={food.id}
-              className={`${getCardClasses()} p-4 text-center cursor-move hover:scale-105 transition-transform`}
-              draggable
-              onDragStart={(e) => handleDragStart(e, food)}
-            >
-              <div className="text-3xl mb-2">{food.image}</div>
-              <div className={`text-sm font-semibold text-${getTextColor()}`}>{food.name}</div>
-            </div>
-          ))}
+      {/* Score (en bas) */}
+      <div className="text-center mb-8">
+        <div className={`inline-block ${getCardClasses()} px-6 py-3`}>
+          <p className={`text-lg font-semibold text-${getTextColor()}`}>
+            Score: {score}/{totalFoods}
+          </p>
         </div>
       </div>
 

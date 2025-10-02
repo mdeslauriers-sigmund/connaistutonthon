@@ -101,6 +101,11 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
       )
       // Mettre à jour les associations disponibles
       setRemainingAssociations(newRemainingAssociations)
+      
+      // Vérifier si toutes les associations sont trouvées (basé sur les associations restantes, pas le score)
+      if (newRemainingAssociations.length === 0) {
+        setGameCompleted(true)
+      }
     } else {
       // Erreur : marquer l'item de gauche comme "brûlé" (ne donne plus de points)
       if (!isBurned) {
@@ -109,11 +114,6 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
     }
 
     setSelectedItems([])
-
-    // Vérifier si toutes les associations sont trouvées
-    if (score + (earnPoints ? 1 : 0) >= totalAssociations) {
-      setGameCompleted(true)
-    }
   }
 
   const resetGame = () => {
