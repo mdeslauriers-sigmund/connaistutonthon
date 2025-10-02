@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import Icon from './Icon'
 import './FishTransition.css'
 
 const FishTransition = ({ show }) => {
@@ -35,11 +36,15 @@ const FishTransition = ({ show }) => {
           style={{
             top: `${fish.top}%`,
             animationDelay: `${fish.delay}s`,
-            animationDuration: `${fish.duration}s`,
-            fontSize: `${fish.size}rem`
+            animationDuration: `${fish.duration}s`
           }}
         >
-          {fish.icon}
+          <Icon 
+            name={fish.icon} 
+            className="fish-icon"
+            size={`w-${Math.round(fish.size * 8)} h-${Math.round(fish.size * 8)}`}
+            style={{ width: `${fish.size * 2}rem`, height: `${fish.size * 2}rem` }}
+          />
         </div>
       ))}
     </div>

@@ -12,34 +12,41 @@
 
 .fish {
   position: absolute;
-  right: -100px;
+  left: -100px;
   animation-name: swimAcross;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fish-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  /* Pas de scaleX, les poissons regardent naturellement vers la droite */
   transform: scaleX(-1); /* Inverser horizontalement pour regarder à gauche */
 }
 
 @keyframes swimAcross {
   0% {
-    right: -100px;
+    left: -100px;
     opacity: 0;
-    transform: translateX(0) scaleX(-1);
+    transform: translateY(0);
   }
   5% {
     opacity: 1;
   }
   50% {
-    transform: translateX(0) scaleX(-1) translateY(-5px);
+    transform: translateY(-5px);
   }
   95% {
     opacity: 1;
   }
   100% {
-    right: calc(100vw + 100px);
+    left: calc(100vw + 100px);
     opacity: 0;
-    transform: translateX(0) scaleX(-1) translateY(0);
+    transform: translateY(0);
   }
 }
 
