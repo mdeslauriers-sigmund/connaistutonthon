@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 import ProgressBar from './ProgressBar'
+import FishTransition from './FishTransition'
 
 const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, totalScore = 0, maxScore = 10 }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
@@ -9,6 +10,7 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
   const [score, setScore] = useState(0)
   const [gameCompleted, setGameCompleted] = useState(false)
   const [remainingAssociations, setRemainingAssociations] = useState(theme.content.association.associations)
+  const [showFishTransition, setShowFishTransition] = useState(false)
 
   const totalAssociations = theme.content.association.associations.length
 
@@ -17,7 +19,7 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
 
     const newSelectedItems = [...selectedItems]
     const itemIndex = newSelectedItems.findIndex(selected => selected.id === item.id)
-
+    
     if (itemIndex === -1) {
       // Ajouter l'item s'il n'est pas déjà sélectionné
       if (newSelectedItems.length < 2) {
@@ -35,7 +37,7 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
     if (selectedItems.length !== 2) return
 
     const [item1, item2] = selectedItems
-    const association = remainingAssociations.find(assoc =>
+    const association = remainingAssociations.find(assoc => 
       (assoc.item1.id === item1.id && assoc.item2.id === item2.id) ||
       (assoc.item1.id === item2.id && assoc.item2.id === item1.id)
     )
@@ -50,7 +52,7 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
     if (isCorrect) {
       setScore(score + 1)
       // Retirer les items associés de la liste
-      const newRemainingAssociations = remainingAssociations.filter(assoc =>
+      const newRemainingAssociations = remainingAssociations.filter(assoc => 
         !((assoc.item1.id === item1.id && assoc.item2.id === item2.id) ||
           (assoc.item1.id === item2.id && assoc.item2.id === item1.id))
       )
@@ -59,7 +61,7 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
     }
 
     setSelectedItems([])
-
+    
     // Vérifier si toutes les associations sont trouvées
     if (score + (isCorrect ? 1 : 0) >= totalAssociations) {
       setGameCompleted(true)
@@ -76,7 +78,7 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
 
   const getAvailableItems = () => {
     const usedItems = remainingAssociations.flatMap(assoc => [assoc.item1, assoc.item2])
-    return theme.content.association.items.filter(item =>
+    return theme.content.association.items.filter(item => 
       usedItems.some(used => used.id === item.id)
     )
   }
@@ -91,12 +93,18 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
   // Déclencher le passage automatique quand le jeu est terminé
   useEffect(() => {
     if (gameCompleted) {
+      // Afficher l'animation de poissons
+      setShowFishTransition(true)
+      
       // Attendre 3 secondes pour voir le résultat final
       const timer = setTimeout(() => {
         onComplete(score)
       }, 3000)
-
-      return () => clearTimeout(timer)
+      
+      return () => {
+        clearTimeout(timer)
+        setShowFishTransition(false)
+      }
     }
   }, [gameCompleted, score, onComplete])
 
@@ -107,10 +115,10 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
     icon: '🔗'
   }
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+   return (
+     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
       {/* ProgressBar */}
-      <ProgressBar
+      <ProgressBar 
         currentIndex={currentIndex}
         totalItems={totalItems}
         currentActivity={currentActivity}
@@ -164,10 +172,10 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
             {getColumnItems().column1.map((item) => {
               const isSelected = selectedItems.some(selected => selected.id === item.id)
               return (
-                <div
+                <div 
                   key={item.id}
                   className={`${getCardClasses()} p-6 text-center cursor-pointer hover:scale-105 transition-all duration-200 ${isSelected ? 'ring-4 ring-blue-400 bg-blue-100/20' : ''
-                    }`}
+                  }`}
                   onClick={() => handleItemClick(item)}
                 >
                   <div className="text-4xl mb-3">{item.icon}</div>
@@ -176,16 +184,16 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
               )
             })}
           </div>
-
+          
           {/* Colonne 2 */}
           <div className="space-y-4">
             {getColumnItems().column2.map((item) => {
               const isSelected = selectedItems.some(selected => selected.id === item.id)
               return (
-                <div
+                <div 
                   key={item.id}
                   className={`${getCardClasses()} p-6 text-center cursor-pointer hover:scale-105 transition-all duration-200 ${isSelected ? 'ring-4 ring-blue-400 bg-blue-100/20' : ''
-                    }`}
+                  }`}
                   onClick={() => handleItemClick(item)}
                 >
                   <div className="text-4xl mb-3">{item.icon}</div>
@@ -226,10 +234,13 @@ const AssociationComponent = ({ onComplete, currentIndex = 0, totalItems = 3, to
               Vérifier l'association
             </button>
           </div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-export default AssociationComponent
+         )}
+       </div>
+       
+       {/* Animation de transition */}
+       <FishTransition show={showFishTransition} />
+     </div>
+   )
+ }
+ 
+ export default AssociationComponent

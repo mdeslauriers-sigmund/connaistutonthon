@@ -1,0 +1,74 @@
+.fish-transition-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  pointer-events: none;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.fish {
+  position: absolute;
+  right: -100px;
+  animation-name: swimAcross;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  opacity: 0;
+  transform: scaleX(-1); /* Inverser horizontalement pour regarder à gauche */
+}
+
+@keyframes swimAcross {
+  0% {
+    right: -100px;
+    opacity: 0;
+    transform: translateX(0) scaleX(-1);
+  }
+  5% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(0) scaleX(-1) translateY(-5px);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    right: calc(100vw + 100px);
+    opacity: 0;
+    transform: translateX(0) scaleX(-1) translateY(0);
+  }
+}
+
+/* Animation légère de nage (mouvement vertical) */
+.fish {
+  animation: swimAcross linear forwards, swim 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes swim {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-8px);
+  }
+}
+
+/* Variations pour rendre l'animation plus naturelle */
+.fish:nth-child(odd) {
+  animation: swimAcross linear forwards, swim 0.6s ease-in-out infinite alternate;
+}
+
+.fish:nth-child(even) {
+  animation: swimAcross linear forwards, swim 0.7s ease-in-out infinite alternate-reverse;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fish {
+    font-size: 1.5rem !important;
+  }
+}

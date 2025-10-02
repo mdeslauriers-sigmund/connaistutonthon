@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 import WorldMap from './WorldMap'
 import ProgressBar from './ProgressBar'
+import FishTransition from './FishTransition'
 
 const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, totalScore = 0, maxScore = 8 }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
@@ -9,6 +10,7 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
   const [selectedArea, setSelectedArea] = useState(null)
   const [showResult, setShowResult] = useState(false)
   const [score, setScore] = useState(0)
+  const [showFishTransition, setShowFishTransition] = useState(false)
 
   const questions = theme.content.migration.questions
 
@@ -41,7 +43,7 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
     // Attendre 2 secondes puis passer à l'activité suivante
     setTimeout(() => {
       onComplete(score)
-    }, 2000)
+    }, 3000)
   }
 
   const resetQuiz = () => {
@@ -57,12 +59,18 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
   // Déclencher le passage automatique quand on arrive à la dernière question
   useEffect(() => {
     if (currentQuestion === questions.length - 1 && showResult) {
+      // Afficher l'animation de poissons
+      setShowFishTransition(true)
+      
       // Attendre 3 secondes pour la dernière question (plus de temps pour voir le résultat)
       const timer = setTimeout(() => {
         onComplete(score)
       }, 3000)
 
-      return () => clearTimeout(timer)
+      return () => {
+        clearTimeout(timer)
+        setShowFishTransition(false)
+      }
     }
   }, [currentQuestion, showResult, score, onComplete])
 
@@ -74,7 +82,7 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
       <div className="text-center mb-8">
         <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()} font-molle`}>
           {theme.content.migration.title}
@@ -161,6 +169,9 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
           </div>
         </div>
       </div>
+      
+      {/* Animation de transition */}
+      <FishTransition show={showFishTransition} />
     </div>
   )
 }
