@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 import ThemeToggle from './ThemeToggle'
+import AchievementsSidebar from './AchievementsSidebar'
 import Icon from './Icon'
 
 const Layout = ({ children }) => {
   const { theme, getBackgroundClasses, getHeaderClasses, getFooterClasses, getTextColor, getTextSecondaryColor } = useThemeConfig()
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
     <div className={`min-h-screen transition-all duration-500 ${getBackgroundClasses()}`}>
@@ -20,13 +23,13 @@ const Layout = ({ children }) => {
             </Link>
 
             <div className="flex items-center space-x-4">
-              <Link
-                to="/achievements"
-                className={`text-4xl transition-all duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()} hover:scale-110 transform`}
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className={`text-4xl transition-all duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()} hover:scale-110 transform cursor-pointer`}
                 title="Voir mes achievements"
               >
                 🏆
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -46,6 +49,12 @@ const Layout = ({ children }) => {
           </div>
         </div>
       </footer>
+
+      {/* Achievements Sidebar */}
+      <AchievementsSidebar 
+        isOpen={isSidebarOpen} 
+        onClose={() => setIsSidebarOpen(false)} 
+      />
     </div>
   )
 }

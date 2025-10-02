@@ -3,7 +3,6 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import { AchievementProvider } from './contexts/AchievementContext'
 import HomePage from './pages/HomePage'
 import SequencePage from './pages/SequencePage'
-import AchievementsPage from './pages/AchievementsPage'
 import Layout from './components/Layout'
 import PageTransition from './components/PageTransition'
 import './styles/transitions.css'
@@ -18,7 +17,6 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />            
                 <Route path="/sequence" element={<SequencePage />} />
-                <Route path="/achievements" element={<AchievementsPage />} />
               </Routes>
             </PageTransition>
           </Layout>
