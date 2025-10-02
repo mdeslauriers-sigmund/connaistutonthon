@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const HomePage = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -36,9 +38,12 @@ const HomePage = () => {
         </div>
         
         <div className="mt-12">
-          <button className="bg-tuna-light hover:bg-tuna-blue text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
+          <Link 
+            to="/activities" 
+            className="inline-block bg-tuna-light hover:bg-tuna-blue text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+          >
             Commencer l'aventure
-          </button>
+          </Link>
         </div>
       </div>
     </div>
