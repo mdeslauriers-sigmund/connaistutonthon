@@ -67,6 +67,14 @@ export const ACHIEVEMENTS = {
     category: 'exploration',
     hidden: true
   },
+  LE_COCOTHON: {
+    id: 'le_cocothon',
+    title: 'Le Cocothon',
+    description: 'Mettre tous ses thons dans le même panier',
+    icon: '🧺',
+    category: 'exploration',
+    hidden: true
+  },
   QUICK_LEARNER: {
     id: 'quick_learner',
     title: 'Apprenant rapide',
