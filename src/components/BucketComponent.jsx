@@ -135,7 +135,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
       <div className="text-center mb-8">
         <div className={`inline-block ${getCardClasses()} p-4`}>
           <p className={`text-lg font-semibold text-${getTextColor()}`}>
-            Score: {score}/{totalItems} | Progression: {containers.adults.length + containers.young.length}/{totalItems}
+            Score: {score}/{totalFoods} | Progression: {containers.adults.length + containers.young.length}/{totalFoods}
           </p>
         </div>
       </div>
