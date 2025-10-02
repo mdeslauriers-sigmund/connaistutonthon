@@ -50,10 +50,23 @@ const SequencePage = () => {
     setShowActivity(true)
   }
 
+  // Lancer automatiquement les activités
+  useEffect(() => {
+    if (!showActivity && !isCompleted) {
+      setShowActivity(true)
+    }
+  }, [currentActivityIndex, showActivity, isCompleted])
+
   const handleActivityComplete = (score) => {
     saveScore(currentActivity.id, score)
     setShowActivity(false)
-    handleNextActivity()
+    // Passer directement à l'activité suivante sans étape intermédiaire
+    if (currentActivityIndex < activities.length - 1) {
+      setCurrentActivityIndex(currentActivityIndex + 1)
+    } else {
+      // Toutes les activités sont terminées
+      setIsCompleted(true)
+    }
   }
 
   const handleNextActivity = () => {
@@ -164,19 +177,13 @@ const SequencePage = () => {
           </div>
 
           {/* Actions */}
-          <div className="space-x-4">
+          <div className="text-center">
             <button
               onClick={handleRestartSequence}
               className={`${getButtonClasses()}`}
             >
               Recommencer la Séquence
             </button>
-            <Link 
-              to="/activities" 
-              className={`inline-block ${getButtonClasses('secondary')}`}
-            >
-              Retour aux Activités
-            </Link>
           </div>
         </div>
       </div>
@@ -203,91 +210,7 @@ const SequencePage = () => {
         maxScore={theme.content.sequence.conclusion.totalMaxScore}
       />
 
-      {/* Activité Actuelle */}
-      <div className={`${getCardClasses()} mb-8`}>
-        <div className="text-center">
-          <div className="text-6xl mb-4">{currentActivity.icon}</div>
-          <h2 className={`text-2xl font-bold mb-4 text-${getTextColor()}`}>
-            {currentActivity.title}
-          </h2>
-          <p className={`text-lg mb-6 text-${getTextSecondaryColor()}`}>
-            {currentActivity.description}
-          </p>
-          
-          {scores[currentActivity.id] !== undefined ? (
-            <div className="mb-6">
-              <div className={`text-xl font-bold mb-2 ${scores[currentActivity.id] === currentActivity.maxScore ? 'text-green-500' : 'text-yellow-500'}`}>
-                Score: {scores[currentActivity.id]}/{currentActivity.maxScore}
-              </div>
-              <button
-                onClick={handleNextActivity}
-                className={`${getButtonClasses()}`}
-              >
-                {currentActivityIndex < activities.length - 1 ? 'Activité Suivante' : 'Voir les Résultats'}
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={handleStartActivity}
-              className={`${getButtonClasses()}`}
-            >
-              Commencer l'Activité
-            </button>
-          )}
-        </div>
-      </div>
 
-      {/* Liste des Activités */}
-      <div className="grid md:grid-cols-2 gap-6 mb-8">
-        {activities.map((activity, index) => (
-          <div 
-            key={activity.id} 
-            className={`${getCardClasses()} ${
-              index === currentActivityIndex ? 'ring-2 ring-blue-500' : ''
-            } ${
-              scores[activity.id] !== undefined ? 'opacity-75' : ''
-            }`}
-          >
-            <div className="flex items-center mb-4">
-              <span className="text-3xl mr-3">{activity.icon}</span>
-              <div>
-                <h3 className={`text-lg font-semibold text-${getTextColor()}`}>
-                  {activity.title}
-                </h3>
-                <p className={`text-sm text-${getTextSecondaryColor()}`}>
-                  {activity.description}
-                </p>
-              </div>
-            </div>
-            
-            {scores[activity.id] !== undefined ? (
-              <div className="text-center">
-                <div className={`text-lg font-bold ${
-                  scores[activity.id] === activity.maxScore ? 'text-green-500' : 'text-yellow-500'
-                }`}>
-                  ✓ {scores[activity.id]}/{activity.maxScore}
-                </div>
-              </div>
-            ) : (
-              <div className="text-center">
-                <div className={`text-sm text-${getTextSecondaryColor()}`}>
-                  {index === currentActivityIndex ? 'En cours...' : 'En attente'}
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Navigation */}
-      <div className="text-center">
-        <Link 
-          to="/activities" 
-          className={`inline-block ${getButtonClasses('secondary')}`}
-        >
-          ← Retour aux activités
-        </Link>
-      </div>
     </div>
   )
 }

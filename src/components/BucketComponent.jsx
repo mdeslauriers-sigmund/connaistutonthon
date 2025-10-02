@@ -14,7 +14,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
   const [gameCompleted, setGameCompleted] = useState(false)
 
   const foods = theme.content.bucket.foods
-  const totalItems = foods.length
+  const totalFoods = foods.length
 
   const handleDragStart = (e, food) => {
     setDraggedItem(food)
@@ -55,16 +55,15 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
     }
 
     setDraggedItem(null)
-  }
-
-  const checkGameCompletion = () => {
-    const totalPlaced = containers.adults.length + containers.young.length
-    if (totalPlaced === totalItems) {
+    
+    // Vérifier automatiquement si tous les items sont placés
+    const totalPlaced = newContainers.adults.length + newContainers.young.length
+    if (totalPlaced === totalFoods) {
       setGameCompleted(true)
-      // Déclencher le passage automatique
-      triggerAutoComplete()
     }
   }
+
+  // Fonction supprimée - la vérification se fait automatiquement dans handleDrop
 
   const triggerAutoComplete = () => {
     // Attendre 3 secondes puis passer à l'activité suivante
@@ -168,9 +167,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
             {containers.adults.map((food) => (
               <div 
                 key={food.id}
-                className={`${getCardClasses()} p-3 text-center cursor-move`}
-                draggable
-                onDragStart={(e) => handleDragStart(e, food)}
+                className={`${getCardClasses()} p-3 text-center`}
               >
                 <div className="text-2xl mb-1">{food.image}</div>
                 <div className={`text-xs text-${getTextColor()}`}>{food.name}</div>
@@ -195,9 +192,7 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
             {containers.young.map((food) => (
               <div 
                 key={food.id}
-                className={`${getCardClasses()} p-3 text-center cursor-move`}
-                draggable
-                onDragStart={(e) => handleDragStart(e, food)}
+                className={`${getCardClasses()} p-3 text-center`}
               >
                 <div className="text-2xl mb-1">{food.image}</div>
                 <div className={`text-xs text-${getTextColor()}`}>{food.name}</div>
@@ -229,28 +224,20 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
 
       {/* Actions */}
       <div className="text-center">
-        {gameCompleted ? (
+        {gameCompleted && (
           <div className="mb-6">
             <div className={`${getCardClasses()} p-6`}>
               <h3 className={`text-2xl font-bold mb-4 text-${getTextColor()}`}>
                 🎉 Jeu terminé !
               </h3>
               <p className={`text-lg mb-4 text-${getTextSecondaryColor()}`}>
-                Score final: {score}/{totalItems} ({Math.round((score/totalItems) * 100)}%)
+                Score final: {score}/{totalFoods} ({Math.round((score/totalFoods) * 100)}%)
               </p>
               <p className={`text-sm text-${getTextSecondaryColor()}`}>
                 Passage automatique à l'activité suivante...
               </p>
             </div>
           </div>
-        ) : (
-          <button
-            onClick={checkGameCompletion}
-            className={`${getButtonClasses()} mr-4`}
-            disabled={containers.adults.length + containers.young.length === 0}
-          >
-            Vérifier
-          </button>
         )}
       </div>
     </div>
