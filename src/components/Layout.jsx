@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
               <a href="/" className="text-white hover:text-wave-light transition-colors">
                 Accueil
               </a>
-              <a href="/activities" className="text-white hover:text-wave-light transition-colors">
+              <a href="#activities" className="text-white hover:text-wave-light transition-colors">
                 Activités
               </a>
             </nav>
