@@ -1,4 +1,5 @@
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import './ProgressBar.css'
 
 const ProgressBar = ({ currentIndex, totalItems, currentActivity, totalScore, maxScore }) => {
   const { getTextColor, getCardClasses, theme } = useThemeConfig()
@@ -16,10 +17,13 @@ const ProgressBar = ({ currentIndex, totalItems, currentActivity, totalScore, ma
         </span>
 
         {/* Ocean-themed progress bar */}
-        <div className="relative w-full bg-gradient-to-r from-blue-100 to-blue-200 rounded-full h-8 overflow-hidden">
+        <div className="relative w-full bg-gradient-to-r from-blue-100 to-blue-200 rounded-full h-8 overflow-hidden progress-wave">
           {/* Ocean waves animation */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full transition-all duration-1000 ease-out"
             style={{ width: `${progressPercentage}%` }}>
+            {/* Flowing wave overlay */}
+            <div className="wave-overlay"></div>
+            
             {/* Animated waves */}
             <div className="absolute inset-0 opacity-30">
               <div className="absolute top-0 left-0 w-full h-1 bg-white/40 animate-pulse"></div>
@@ -29,12 +33,12 @@ const ProgressBar = ({ currentIndex, totalItems, currentActivity, totalScore, ma
 
           {/* Swimming fish */}
           <div
-            className="absolute top-1/2 transform -translate-y-1/2 text-2xl transition-all duration-1000 ease-out"
+            className="absolute top-1/2 transform -translate-y-1/2 text-2xl transition-all duration-1000 ease-out z-10"
             style={{ left: `calc(${progressPercentage}% - 1rem)` }}
           >
-            <span className="animate-bounce inline-block transform transition-transform duration-300 scale-x-[-1]"
+            <span className="inline-block transform scale-x-[-1]"
               style={{
-                animation: 'bounce 1s infinite, swim 2s infinite',
+                animation: 'swim 2s ease-in-out infinite',
                 transformOrigin: 'center'
               }}>
               🐟

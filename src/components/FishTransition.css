@@ -24,7 +24,6 @@
 
 .fish-icon {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  transform: scaleX(-1); /* Inverser horizontalement pour regarder à gauche */
 }
 
 @keyframes swimAcross {
