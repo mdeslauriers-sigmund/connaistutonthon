@@ -1,30 +1,15 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useThemeConfig } from '../hooks/useThemeConfig'
 
 const MigrationPage = () => {
+  const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [selectedPoint, setSelectedPoint] = useState(null)
   const [showResult, setShowResult] = useState(false)
   const [score, setScore] = useState(0)
 
-  const questions = [
-    {
-      id: 0,
-      season: 'été',
-      correctAnswer: { x: 60, y: 40 },
-      explanation: 'En été, le thon de l\'Atlantique se trouve dans les eaux plus froides du nord, près des côtes canadiennes et européennes, où la nourriture est abondante.',
-      successMessage: 'Excellent ! En été, le thon migre vers les eaux plus froides du nord.',
-      failureMessage: 'Pas tout à fait ! En été, le thon préfère les eaux plus fraîches du nord.'
-    },
-    {
-      id: 1,
-      season: 'hiver',
-      correctAnswer: { x: 30, y: 60 },
-      explanation: 'En hiver, le thon de l\'Atlantique migre vers les eaux plus chaudes du sud, près des Caraïbes et de l\'Afrique de l\'Ouest.',
-      successMessage: 'Parfait ! En hiver, le thon se dirige vers les eaux plus chaudes du sud.',
-      failureMessage: 'Pas correct ! En hiver, le thon migre vers les eaux plus chaudes du sud.'
-    }
-  ]
+  const questions = theme.content.migration.questions
 
   const handlePointClick = (x, y) => {
     if (showResult) return
@@ -61,25 +46,25 @@ const MigrationPage = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-          Migration du Thon 🐟🌊
+        <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()}`}>
+          {theme.content.migration.title}
         </h1>
-        <p className="text-xl text-wave-light mb-8 max-w-3xl mx-auto">
-          Découvrez les mystères de la migration du thon de l'Atlantique à travers les saisons.
+        <p className={`text-xl mb-8 max-w-3xl mx-auto text-${getTextSecondaryColor()}`}>
+          {theme.content.migration.subtitle}
         </p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Question Panel */}
-        <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+        <div className={`${getCardClasses()}`}>
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-white mb-4">
-              Question {currentQuestion + 1}/2
+            <h2 className={`text-2xl font-bold mb-4 text-${getTextColor()}`}>
+              Question {currentQuestion + 1}/{questions.length}
             </h2>
-            <p className="text-lg text-wave-light">
-              Où se trouve le thon de l'Atlantique en <span className="font-bold text-tuna-light">{currentQ.season}</span> ?
+            <p className={`text-lg text-${getTextSecondaryColor()}`}>
+              Où se trouve {theme.name === 'Thon' ? 'le thon de l\'Atlantique' : 'les taons'} en <span className={`font-bold text-${theme.colors.primary}`}>{currentQ.season}</span> ?
             </p>
-            <p className="text-sm text-wave-light mt-2">
+            <p className={`text-sm text-${getTextSecondaryColor()} mt-2`}>
               Cliquez sur la carte pour sélectionner votre réponse
             </p>
           </div>
@@ -101,7 +86,7 @@ const MigrationPage = () => {
           )}
 
           <div className="flex justify-between items-center">
-            <div className="text-wave-light">
+            <div className={`text-${getTextSecondaryColor()}`}>
               Score: {score}/{questions.length}
             </div>
             {showResult && (
@@ -109,19 +94,19 @@ const MigrationPage = () => {
                 {currentQuestion < questions.length - 1 ? (
                   <button
                     onClick={nextQuestion}
-                    className="bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200"
+                    className={`${getButtonClasses()} py-2 px-4 text-sm`}
                   >
                     Question suivante
                   </button>
                 ) : (
                   <div className="text-center">
-                    <p className="text-white font-bold mb-2">Quiz terminé !</p>
-                    <p className="text-wave-light mb-4">
+                    <p className={`font-bold mb-2 text-${getTextColor()}`}>Quiz terminé !</p>
+                    <p className={`mb-4 text-${getTextSecondaryColor()}`}>
                       Score final: {score}/{questions.length}
                     </p>
                     <button
                       onClick={resetQuiz}
-                      className="bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200"
+                      className={`${getButtonClasses()} py-2 px-4 text-sm`}
                     >
                       Recommencer
                     </button>
@@ -133,9 +118,9 @@ const MigrationPage = () => {
         </div>
 
         {/* Map Panel */}
-        <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
-          <h3 className="text-xl font-bold text-white mb-4 text-center">
-            Carte de l'Atlantique
+        <div className={`${getCardClasses()}`}>
+          <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
+            {theme.content.migration.mapTitle}
           </h3>
           <div className="relative bg-gradient-to-b from-blue-900 to-blue-800 rounded-lg p-4 min-h-[400px] border-2 border-blue-300/30">
             {/* Map Grid */}
@@ -163,11 +148,11 @@ const MigrationPage = () => {
             </div>
             
             {/* Map Labels */}
-            <div className="absolute top-2 left-2 text-blue-200 text-xs font-bold">Nord</div>
-            <div className="absolute bottom-2 left-2 text-blue-200 text-xs font-bold">Sud</div>
-            <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-blue-200 text-xs font-bold">Europe</div>
-            <div className="absolute top-2 right-2 text-blue-200 text-xs font-bold">Amérique</div>
-            <div className="absolute bottom-2 right-2 text-blue-200 text-xs font-bold">Afrique</div>
+            <div className="absolute top-2 left-2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.north}</div>
+            <div className="absolute bottom-2 left-2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.south}</div>
+            <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.europe}</div>
+            <div className="absolute top-2 right-2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.america}</div>
+            <div className="absolute bottom-2 right-2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.africa}</div>
           </div>
         </div>
       </div>
@@ -176,13 +161,13 @@ const MigrationPage = () => {
       <div className="mt-8 text-center">
         <Link 
           to="/activities" 
-          className="inline-block bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors duration-200 border border-white/20 mr-4"
+          className={`inline-block mr-4 ${getButtonClasses('secondary')}`}
         >
           ← Retour aux activités
         </Link>
         <Link 
           to="/" 
-          className="inline-block bg-tuna-light hover:bg-tuna-blue text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors duration-200"
+          className={`inline-block ${getButtonClasses()}`}
         >
           🏠 Accueil
         </Link>
