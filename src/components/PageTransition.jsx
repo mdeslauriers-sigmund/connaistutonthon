@@ -8,13 +8,19 @@ const PageTransition = ({ children }) => {
 
   useEffect(() => {
     if (location !== displayLocation) {
-      setTransitionStage('fadeOut')
+      // Déterminer la direction de navigation
+      const isNavigatingToHome = location.pathname === '/' || location.pathname === '/connaistutonthon/'
+      const transitionOut = isNavigatingToHome ? 'slideOutLeft' : 'fadeOut'
+      setTransitionStage(transitionOut)
     }
   }, [location, displayLocation])
 
   const onAnimationEnd = () => {
-    if (transitionStage === 'fadeOut') {
-      setTransitionStage('fadeIn')
+    if (transitionStage === 'fadeOut' || transitionStage === 'slideOutLeft') {
+      // Déterminer la direction d'entrée
+      const isNavigatingToHome = location.pathname === '/' || location.pathname === '/connaistutonthon/'
+      const transitionIn = isNavigatingToHome ? 'slideInLeft' : 'fadeIn'
+      setTransitionStage(transitionIn)
       setDisplayLocation(location)
     }
   }

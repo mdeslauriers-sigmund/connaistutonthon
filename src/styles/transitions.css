@@ -1,69 +1,74 @@
-/* Page Transitions */
+/* Page Transitions - Slide Effect */
 .page-transition {
-  animation-duration: 0.3s;
-  animation-timing-function: ease-in-out;
+  animation-duration: 0.25s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   animation-fill-mode: both;
 }
 
 .page-transition.fadeOut {
-  animation-name: fadeOut;
+  animation-name: slideOut;
 }
 
 .page-transition.fadeIn {
-  animation-name: fadeIn;
+  animation-name: slideIn;
 }
 
-@keyframes fadeOut {
+/* Navigation vers l'accueil (retour) */
+.page-transition.slideOutLeft {
+  animation-name: slideOutLeft;
+}
+
+.page-transition.slideInLeft {
+  animation-name: slideInLeft;
+}
+
+/* Slide Out - Page sortante glisse vers la gauche (navigation avant) */
+@keyframes slideOut {
   from {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
   to {
-    opacity: 0;
-    transform: translateY(-10px);
+    transform: translateX(-100%);
   }
 }
 
-@keyframes fadeIn {
+/* Slide In - Page entrante glisse depuis la droite (navigation avant) */
+@keyframes slideIn {
   from {
-    opacity: 0;
-    transform: translateY(10px);
+    transform: translateX(100%);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
-/* Slide Transitions (alternative) */
+/* Slide Out Left - Page sortante glisse vers la droite (navigation arrière) */
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Slide In Left - Page entrante glisse depuis la gauche (navigation arrière) */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Alternative slide animations (not used but available) */
 .page-transition.slideOut {
   animation-name: slideOut;
 }
 
 .page-transition.slideIn {
   animation-name: slideIn;
-}
-
-@keyframes slideOut {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 /* Scale Transitions (alternative) */
@@ -106,14 +111,15 @@
 @supports (view-transition-name: auto) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation-duration: 0.3s;
+    animation-duration: 0.25s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   ::view-transition-old(root) {
-    animation-name: fadeOut;
+    animation-name: slideOut;
   }
 
   ::view-transition-new(root) {
-    animation-name: fadeIn;
+    animation-name: slideIn;
   }
 }
