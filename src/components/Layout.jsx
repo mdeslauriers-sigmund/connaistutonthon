@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
           <div className="flex justify-between items-center py-6">
             <Link 
               to="/" 
-              className={`text-2xl font-bold transition-colors duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()}`}
+              className={`text-2xl font-bold transition-all duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()} hover:scale-105 transform`}
             >
               {theme.icon} Connais-tu ton {theme.name}
             </Link>
@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
             <div className="flex items-center space-x-4">
               <Link
                 to="/achievements"
-                className={`text-lg transition-colors duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()}`}
+                className={`text-2xl transition-all duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()} hover:scale-110 transform`}
                 title="Voir mes achievements"
               >
                 🏆

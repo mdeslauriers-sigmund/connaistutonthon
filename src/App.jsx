@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage'
 import SequencePage from './pages/SequencePage'
 import AchievementsPage from './pages/AchievementsPage'
 import Layout from './components/Layout'
+import PageTransition from './components/PageTransition'
+import './styles/transitions.css'
 
 function App() {
   return (
@@ -12,11 +14,13 @@ function App() {
       <AchievementProvider>
         <Router>
           <Layout>
-            <Routes>
-              <Route path="/" element={<HomePage />} />            
-              <Route path="/sequence" element={<SequencePage />} />
-              <Route path="/achievements" element={<AchievementsPage />} />
-            </Routes>
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<HomePage />} />            
+                <Route path="/sequence" element={<SequencePage />} />
+                <Route path="/achievements" element={<AchievementsPage />} />
+              </Routes>
+            </PageTransition>
           </Layout>
         </Router>
       </AchievementProvider>
