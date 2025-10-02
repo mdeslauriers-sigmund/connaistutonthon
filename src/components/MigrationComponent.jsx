@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import ProgressBar from './ProgressBar'
 
-const MigrationComponent = ({ onComplete }) => {
+const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, totalScore = 0, maxScore = 8 }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [selectedPoint, setSelectedPoint] = useState(null)
@@ -64,8 +65,24 @@ const MigrationComponent = ({ onComplete }) => {
     }
   }, [currentQuestion, showResult, score, onComplete])
 
+  const currentActivity = {
+    id: 'migration',
+    title: theme.content.migration.title,
+    description: theme.content.migration.subtitle,
+    icon: '🌊'
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* ProgressBar */}
+      <ProgressBar 
+        currentIndex={currentIndex}
+        totalItems={totalItems}
+        currentActivity={currentActivity}
+        totalScore={totalScore}
+        maxScore={maxScore}
+      />
+
       <div className="text-center mb-8">
         <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()}`}>
           {theme.content.migration.title}

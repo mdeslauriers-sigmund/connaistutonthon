@@ -18,21 +18,6 @@ const Layout = ({ children }) => {
             </Link>
             
             <div className="flex items-center space-x-4">
-              <nav className="hidden md:flex space-x-8">
-                <Link 
-                  to="/" 
-                  className={`transition-colors duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()}`}
-                >
-                  Accueil
-                </Link>
-                <Link 
-                  to="/activities" 
-                  className={`transition-colors duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()}`}
-                >
-                  Activités
-                </Link>
-              </nav>
-              <ThemeToggle />
             </div>
           </div>
         </div>
@@ -44,9 +29,12 @@ const Layout = ({ children }) => {
       
       <footer className={getFooterClasses()}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <p className={`text-center transition-colors duration-300 text-${getTextColor()}/70`}>
-            © 2024 Connais-tu ton {theme.name} - {theme.content.footer}
-          </p>
+          <div className="flex flex-col items-center space-y-4">            
+            <p className={`text-center transition-colors duration-300 text-${getTextColor()}/70`}>
+              © 2025 Connais-tu ton {theme.name} - {theme.content.footer}
+            </p>
+            <ThemeToggle />
+          </div>
         </div>
       </footer>
     </div>

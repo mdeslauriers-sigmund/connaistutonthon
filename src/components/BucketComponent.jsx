@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import ProgressBar from './ProgressBar'
 
-const BucketComponent = ({ onComplete }) => {
+const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalScore = 0, maxScore = 8 }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const [draggedItem, setDraggedItem] = useState(null)
   const [containers, setContainers] = useState({
@@ -96,8 +97,24 @@ const BucketComponent = ({ onComplete }) => {
     }
   }, [gameCompleted, score, onComplete])
 
+  const currentActivity = {
+    id: 'bucket',
+    title: theme.content.bucket.title,
+    description: theme.content.bucket.subtitle,
+    icon: '🍽️'
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* ProgressBar */}
+      <ProgressBar 
+        currentIndex={currentIndex}
+        totalItems={totalItems}
+        currentActivity={currentActivity}
+        totalScore={totalScore}
+        maxScore={maxScore}
+      />
+
       <div className="text-center mb-8">
         <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()}`}>
           {theme.content.bucket.title}

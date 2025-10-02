@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 import MigrationComponent from '../components/MigrationComponent'
 import BucketComponent from '../components/BucketComponent'
+import ProgressBar from '../components/ProgressBar'
 
 const SequencePage = () => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
@@ -86,9 +87,25 @@ const SequencePage = () => {
   // Afficher l'activité en cours
   if (showActivity) {
     if (currentActivity.id === 'migration') {
-      return <MigrationComponent onComplete={handleActivityComplete} />
+      return (
+        <MigrationComponent 
+          onComplete={handleActivityComplete}
+          currentIndex={currentActivityIndex}
+          totalItems={activities.length}
+          totalScore={totalScore}
+          maxScore={theme.content.sequence.conclusion.totalMaxScore}
+        />
+      )
     } else if (currentActivity.id === 'bucket') {
-      return <BucketComponent onComplete={handleActivityComplete} />
+      return (
+        <BucketComponent 
+          onComplete={handleActivityComplete}
+          currentIndex={currentActivityIndex}
+          totalItems={activities.length}
+          totalScore={totalScore}
+          maxScore={theme.content.sequence.conclusion.totalMaxScore}
+        />
+      )
     }
   }
 
@@ -178,35 +195,13 @@ const SequencePage = () => {
       </div>
 
       {/* Progression */}
-      <div className="mb-8">
-        <div className={`${getCardClasses()} mb-4`}>
-          <div className="flex justify-between items-center mb-2">
-            <span className={`text-sm font-medium text-${getTextColor()}`}>
-              Progression
-            </span>
-            <span className={`text-sm font-medium text-${getTextColor()}`}>
-              {currentActivityIndex + 1}/{activities.length}
-            </span>
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${((currentActivityIndex + 1) / activities.length) * 100}%` }}
-            ></div>
-          </div>
-        </div>
-
-        <div className={`${getCardClasses()}`}>
-          <div className="text-center">
-            <div className="text-2xl font-bold mb-2">
-              Score Actuel: {totalScore}/{theme.content.sequence.conclusion.totalMaxScore}
-            </div>
-            <div className="text-sm">
-              {Math.round((totalScore / theme.content.sequence.conclusion.totalMaxScore) * 100)}%
-            </div>
-          </div>
-        </div>
-      </div>
+      <ProgressBar 
+        currentIndex={currentActivityIndex}
+        totalItems={activities.length}
+        currentActivity={currentActivity}
+        totalScore={totalScore}
+        maxScore={theme.content.sequence.conclusion.totalMaxScore}
+      />
 
       {/* Activité Actuelle */}
       <div className={`${getCardClasses()} mb-8`}>
