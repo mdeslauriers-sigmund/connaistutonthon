@@ -101,31 +101,31 @@ export const thonTheme = {
       }
     },
     association: {
-      title: 'Associations du Thon 🐟🔗',
-      subtitle: 'Associez les éléments liés au thon pour découvrir ses caractéristiques.',
+      title: 'Techniques de pêche et impact environnemental 🐟🔗',
+      subtitle: 'Associez chaque technique de pêche avec son impact principal.',
       items: [
-        { id: 1, name: 'Océan Atlantique', icon: '🌊' },
-        { id: 2, name: 'Migration', icon: '🗺️' },
-        { id: 3, name: 'Plancton', icon: '🦠' },
-        { id: 4, name: 'Sardines', icon: '🐟' },
-        { id: 5, name: 'Température', icon: '🌡️' },
-        { id: 6, name: 'Vitesse', icon: '⚡' }
+        { id: 1, name: 'Surpêche', icon: '🎣' },
+        { id: 2, name: 'Endommage les habitats marins', icon: '🌊' },
+        { id: 3, name: 'Capture accessoire', icon: '🐢' },
+        { id: 4, name: 'Perturbe la chaîne alimentaire', icon: '🐟' },
+        { id: 5, name: 'Chalutage de fond', icon: '🚤' },
+        { id: 6, name: 'Mortalité élevée parmi les espèces vulnérables', icon: '💀' }
       ],
       associations: [
         {
-          item1: { id: 1, name: 'Océan Atlantique', icon: '🌊' },
-          item2: { id: 2, name: 'Migration', icon: '🗺️' },
-          explanation: 'Le thon migre dans l\'océan Atlantique selon les saisons.'
+          item1: { id: 1, name: 'Surpêche', icon: '🎣' },
+          item2: { id: 4, name: 'Perturbe la chaîne alimentaire', icon: '🐟' },
+          explanation: 'La surpêche détruit les populations de poissons en les pêchant en excès, ce qui peut entraîner une perturbation de la chaîne alimentaire.'
         },
         {
-          item1: { id: 3, name: 'Plancton', icon: '🦠' },
-          item2: { id: 4, name: 'Sardines', icon: '🐟' },
-          explanation: 'Les jeunes thons mangent du plancton, les adultes chassent les sardines.'
+          item1: { id: 5, name: 'Chalutage de fond', icon: '🚤' },
+          item2: { id: 2, name: 'Endommage les habitats marins', icon: '🌊' },
+          explanation: 'Le chalutage de fond endommage les habitats marins, notamment les récifs coralliens.'
         },
         {
-          item1: { id: 5, name: 'Température', icon: '🌡️' },
-          item2: { id: 6, name: 'Vitesse', icon: '⚡' },
-          explanation: 'La température de l\'eau influence la vitesse de nage du thon.'
+          item1: { id: 3, name: 'Capture accessoire', icon: '🐢' },
+          item2: { id: 6, name: 'Mortalité élevée parmi les espèces vulnérables', icon: '💀' },
+          explanation: 'La capture accessoire peut entraîner une mortalité élevée parmi les espèces vulnérables.'
         }
       ]
     },

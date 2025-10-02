@@ -2,13 +2,13 @@ import { useThemeConfig } from '../hooks/useThemeConfig'
 
 const ProgressBar = ({ currentIndex, totalItems, currentActivity, totalScore, maxScore }) => {
   const { getTextColor, getCardClasses } = useThemeConfig()
-  
+
   const progressPercentage = ((currentIndex + 1) / totalItems) * 100
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 flex gap-4 items-stretch h-16">
       {/* Barre de progression principale */}
-      <div className={`${getCardClasses()} mb-4`}>
+      <div className={`${getCardClasses()} grow py-2`}>
         <div className="flex justify-between items-center mb-2">
           <span className={`text-sm font-medium text-${getTextColor()}`}>
             Progression
@@ -18,7 +18,7 @@ const ProgressBar = ({ currentIndex, totalItems, currentActivity, totalScore, ma
           </span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
-          <div 
+          <div
             className="bg-blue-600 h-2 rounded-full transition-all duration-300"
             style={{ width: `${progressPercentage}%` }}
           ></div>
@@ -26,26 +26,16 @@ const ProgressBar = ({ currentIndex, totalItems, currentActivity, totalScore, ma
       </div>
 
       {/* Activité en cours */}
-      <div className={`${getCardClasses()}`}>
-        <div className="flex items-center">
-          <span className="text-3xl mr-4">{currentActivity.icon}</span>
-          <div className="flex-1">
-            <h3 className={`text-lg font-semibold text-${getTextColor()}`}>
-              {currentActivity.title}
-            </h3>
-            <p className={`text-sm text-${getTextColor()}/70`}>
-              {currentActivity.description}
-            </p>
+      <div className={`${getCardClasses()} h-full !py-1 !px-4`}>
+        <div className="flex items-center justify-center flex-col">
+          <div className="text-sm text-gray-300">
+            Score actuel
           </div>
-          <div className="text-right">
-            <div className={`text-2xl font-bold text-${getTextColor()}`}>
-              {totalScore}/{maxScore}
-            </div>
-            <div className="text-sm text-gray-500">
-              Score actuel
-            </div>
+          <div className={`text-2xl font-bold text-${getTextColor()}`}>
+            {totalScore}/{maxScore}
           </div>
         </div>
+
       </div>
     </div>
   )

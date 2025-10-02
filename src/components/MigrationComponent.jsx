@@ -61,7 +61,7 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
     if (currentQuestion === questions.length - 1 && showResult) {
       // Afficher l'animation de poissons
       setShowFishTransition(true)
-      
+
       // Attendre 3 secondes pour la dernière question (plus de temps pour voir le résultat)
       const timer = setTimeout(() => {
         onComplete(score)
@@ -82,7 +82,7 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
       <div className="text-center mb-8">
         <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()} font-molle`}>
           {theme.content.migration.title}
@@ -169,7 +169,7 @@ const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, tota
           </div>
         </div>
       </div>
-      
+
       {/* Animation de transition */}
       <FishTransition show={showFishTransition} />
     </div>
