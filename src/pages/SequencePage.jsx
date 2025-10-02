@@ -111,13 +111,13 @@ const SequencePage = () => {
           </div>
 
           {/* Détail des Scores */}
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
             {activities.map((activity) => (
               <div key={activity.id} className={`${getCardClasses()}`}>
-                <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-3">{activity.icon}</span>
+                <div className="mb-4">
+                  <span className="text-4xl">{activity.icon}</span>
                   <div>
-                    <h3 className={`text-lg font-semibold text-${getTextColor()}`}>
+                    <h3 className={`text-lg mt-2 font-semibold text-${getTextColor()}`}>
                       {activity.title}
                     </h3>
                     <p className={`text-sm text-${getTextSecondaryColor()}`}>
