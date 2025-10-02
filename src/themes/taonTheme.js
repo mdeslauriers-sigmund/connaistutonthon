@@ -127,6 +127,40 @@ export const taonTheme = {
           explanation: 'Les larves se nourrissent de matière organique en décomposition.'
         }
       ]
+    },
+    sequence: {
+      title: 'Séquence d\'Apprentissage des Taons 🐝📚',
+      subtitle: 'Parcourez les activités dans l\'ordre pour découvrir tous les secrets des taons !',
+      activities: [
+        {
+          id: 'migration',
+          title: 'Migration des Taons',
+          description: 'Découvrez les mystères de la migration',
+          icon: '🌸',
+          path: '/migration',
+          maxScore: 2
+        },
+        {
+          id: 'bucket',
+          title: 'Alimentation des Taons',
+          description: 'Classez l\'alimentation des larves et adultes',
+          icon: '🍽️',
+          path: '/bucket',
+          maxScore: 6
+        }
+      ],
+      conclusion: {
+        title: 'Félicitations ! 🎉',
+        subtitle: 'Vous avez terminé la séquence d\'apprentissage des taons !',
+        totalMaxScore: 8,
+        messages: {
+          perfect: 'Parfait ! Vous êtes un véritable expert des taons !',
+          excellent: 'Excellent ! Vous connaissez très bien les taons !',
+          good: 'Bien joué ! Vous avez de bonnes connaissances sur les taons !',
+          average: 'Pas mal ! Continuez à apprendre sur les taons !',
+          needsImprovement: 'C\'est un début ! Relisez les explications pour mieux comprendre.'
+        }
+      }
     }
   }
 }

@@ -11,44 +11,21 @@ const ActivityPage = () => {
           Découvrez nos activités interactives pour apprendre tout sur le thon!
         </p>
         
-        <div className="grid md:grid-cols-3 gap-8 mt-12">
-          <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20">
-            <div className="text-5xl mb-4">🧠</div>
-            <h3 className="text-2xl font-semibold text-white mb-4">Quiz Thon</h3>
-            <p className="text-wave-light mb-6">
-              Testez vos connaissances sur la biologie, l'habitat et les habitudes du thon.
+        <div className="flex justify-center mt-12">
+          <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20 max-w-md">
+            <div className="text-5xl mb-4 text-center">📚</div>
+            <h3 className="text-2xl font-semibold text-white mb-4 text-center">Séquence Complète</h3>
+            <p className="text-wave-light mb-6 text-center">
+              Parcourez toutes les activités dans l'ordre et cumulez votre score !
             </p>
-            <button className="bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200">
-              Commencer le Quiz
-            </button>
-          </div>
-          
-          <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20">
-            <div className="text-5xl mb-4">🌊</div>
-            <h3 className="text-2xl font-semibold text-white mb-4">Migration du Thon</h3>
-            <p className="text-wave-light mb-6">
-              Découvrez les mystères de la migration du thon à travers les saisons.
-            </p>
-            <Link 
-              to="/migration"
-              className="inline-block bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200"
-            >
-              Explorer la Migration
-            </Link>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20">
-            <div className="text-5xl mb-4">🍽️</div>
-            <h3 className="text-2xl font-semibold text-white mb-4">Alimentation</h3>
-            <p className="text-wave-light mb-6">
-              Classez les aliments selon qu'ils sont consommés par les jeunes ou les adultes.
-            </p>
-            <Link 
-              to="/bucket"
-              className="inline-block bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200"
-            >
-              Classer l'Alimentation
-            </Link>
+            <div className="text-center">
+              <Link 
+                to="/sequence"
+                className="inline-block bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200"
+              >
+                Commencer la Séquence
+              </Link>
+            </div>
           </div>
         </div>
         

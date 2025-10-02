@@ -14,7 +14,7 @@
 ### Activity page
 - TODO : doc
 
-### Migration page
+### Migration component
 - Permet à l'utilisateur de mieux connaître la migration du thon
 - On lui demande ou est le thon de l'atlantique en été et en hiver
 - L'utilisateur doit sélectionner le bon point parmi une série de point sur la carte
@@ -22,7 +22,7 @@
   - Lorsque la réponse est bonne, on affiche un message de succès
   - Lorsque la réponse est mauvaise, on affiche un message de d'échec
 
-### Bucket page
+### Bucket component
 - Permet à l'utilisateur de catégoriser l'alimentation du thon
 - On lui demande, pour chaque aliment, de déterminer si c'est l'alimentation des jeunes ou des adultes
   - Les aliments doivent être déplacés en drag n drop
@@ -30,3 +30,10 @@
     - Lors de la sélection de la réponse, on affiche une explication
     - Lorsque la réponse est bonne, on affiche un message de succès
     - Lorsque la réponse est mauvaise, on affiche un message de d'échec
+
+### Sequence page
+- Permet de parcourir les pages d'activité de façon séquentielle en comptabilisant le score accumulé au travers des activités
+- Séquence initiale : 
+  1. Migration page
+  2. Bucket page
+- À la fin de la séquence, diriger l'utilisateur vers une page de conclusion affichant le score total

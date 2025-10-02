@@ -127,6 +127,40 @@ export const thonTheme = {
           explanation: 'Les anchois constituent une part importante de l\'alimentation des thons adultes.'
         }
       ]
+    },
+    sequence: {
+      title: 'Séquence d\'Apprentissage du Thon 🐟📚',
+      subtitle: 'Parcourez les activités dans l\'ordre pour découvrir tous les secrets du thon !',
+      activities: [
+        {
+          id: 'migration',
+          title: 'Migration du Thon',
+          description: 'Découvrez les mystères de la migration',
+          icon: '🌊',
+          path: '/migration',
+          maxScore: 2
+        },
+        {
+          id: 'bucket',
+          title: 'Alimentation du Thon',
+          description: 'Classez l\'alimentation des jeunes et adultes',
+          icon: '🍽️',
+          path: '/bucket',
+          maxScore: 6
+        }
+      ],
+      conclusion: {
+        title: 'Félicitations ! 🎉',
+        subtitle: 'Vous avez terminé la séquence d\'apprentissage du thon !',
+        totalMaxScore: 8,
+        messages: {
+          perfect: 'Parfait ! Vous êtes un véritable expert du thon !',
+          excellent: 'Excellent ! Vous connaissez très bien le thon !',
+          good: 'Bien joué ! Vous avez de bonnes connaissances sur le thon !',
+          average: 'Pas mal ! Continuez à apprendre sur le thon !',
+          needsImprovement: 'C\'est un début ! Relisez les explications pour mieux comprendre.'
+        }
+      }
     }
   }
 }

@@ -1,8 +1,7 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 
-const MigrationPage = () => {
+const MigrationComponent = ({ onComplete }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [selectedPoint, setSelectedPoint] = useState(null)
@@ -31,12 +30,16 @@ const MigrationPage = () => {
       setSelectedPoint(null)
       setShowResult(false)
     } else {
-      // Quiz terminé, envoyer le score
-      const event = new CustomEvent('scoreUpdate', {
-        detail: { activityId: 'migration', score: score }
-      })
-      window.dispatchEvent(event)
+      // Quiz terminé, déclencher le passage automatique
+      triggerAutoComplete()
     }
+  }
+
+  const triggerAutoComplete = () => {
+    // Attendre 2 secondes puis passer à l'activité suivante
+    setTimeout(() => {
+      onComplete(score)
+    }, 2000)
   }
 
   const resetQuiz = () => {
@@ -48,6 +51,18 @@ const MigrationPage = () => {
 
   const currentQ = questions[currentQuestion]
   const isCorrect = selectedPoint && Math.abs(selectedPoint.x - currentQ.correctAnswer.x) < 10 && Math.abs(selectedPoint.y - currentQ.correctAnswer.y) < 10
+
+  // Déclencher le passage automatique quand on arrive à la dernière question
+  useEffect(() => {
+    if (currentQuestion === questions.length - 1 && showResult) {
+      // Attendre 3 secondes pour la dernière question (plus de temps pour voir le résultat)
+      const timer = setTimeout(() => {
+        onComplete(score)
+      }, 3000)
+      
+      return () => clearTimeout(timer)
+    }
+  }, [currentQuestion, showResult, score, onComplete])
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -110,12 +125,9 @@ const MigrationPage = () => {
                     <p className={`mb-4 text-${getTextSecondaryColor()}`}>
                       Score final: {score}/{questions.length}
                     </p>
-                    <button
-                      onClick={resetQuiz}
-                      className={`${getButtonClasses()} py-2 px-4 text-sm`}
-                    >
-                      Recommencer
-                    </button>
+                    <p className={`text-sm text-${getTextSecondaryColor()}`}>
+                      Passage automatique à l'activité suivante...
+                    </p>
                   </div>
                 )}
               </div>
@@ -162,24 +174,8 @@ const MigrationPage = () => {
           </div>
         </div>
       </div>
-
-      {/* Navigation */}
-      <div className="mt-8 text-center">
-        <Link 
-          to="/activities" 
-          className={`inline-block mr-4 ${getButtonClasses('secondary')}`}
-        >
-          ← Retour aux activités
-        </Link>
-        <Link 
-          to="/" 
-          className={`inline-block ${getButtonClasses()}`}
-        >
-          🏠 Accueil
-        </Link>
-      </div>
     </div>
   )
 }
 
-export default MigrationPage
+export default MigrationComponent

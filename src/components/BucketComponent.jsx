@@ -1,8 +1,7 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 
-const BucketPage = () => {
+const BucketComponent = ({ onComplete }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const [draggedItem, setDraggedItem] = useState(null)
   const [containers, setContainers] = useState({
@@ -61,12 +60,16 @@ const BucketPage = () => {
     const totalPlaced = containers.adults.length + containers.young.length
     if (totalPlaced === totalItems) {
       setGameCompleted(true)
-      // Envoyer le score
-      const event = new CustomEvent('scoreUpdate', {
-        detail: { activityId: 'bucket', score: score }
-      })
-      window.dispatchEvent(event)
+      // Déclencher le passage automatique
+      triggerAutoComplete()
     }
+  }
+
+  const triggerAutoComplete = () => {
+    // Attendre 3 secondes puis passer à l'activité suivante
+    setTimeout(() => {
+      onComplete(score)
+    }, 3000)
   }
 
   const resetGame = () => {
@@ -80,6 +83,18 @@ const BucketPage = () => {
     const placedItems = [...containers.adults, ...containers.young]
     return foods.filter(food => !placedItems.some(item => item.id === food.id))
   }
+
+  // Déclencher le passage automatique quand le jeu est terminé
+  useEffect(() => {
+    if (gameCompleted) {
+      // Attendre 3 secondes pour voir le résultat final
+      const timer = setTimeout(() => {
+        onComplete(score)
+      }, 3000)
+      
+      return () => clearTimeout(timer)
+    }
+  }, [gameCompleted, score, onComplete])
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -206,12 +221,9 @@ const BucketPage = () => {
               <p className={`text-lg mb-4 text-${getTextSecondaryColor()}`}>
                 Score final: {score}/{totalItems} ({Math.round((score/totalItems) * 100)}%)
               </p>
-              <button
-                onClick={resetGame}
-                className={`${getButtonClasses()} mr-4`}
-              >
-                Rejouer
-              </button>
+              <p className={`text-sm text-${getTextSecondaryColor()}`}>
+                Passage automatique à l'activité suivante...
+              </p>
             </div>
           </div>
         ) : (
@@ -223,16 +235,9 @@ const BucketPage = () => {
             Vérifier
           </button>
         )}
-
-        <Link 
-          to="/activities" 
-          className={`inline-block ${getButtonClasses('secondary')}`}
-        >
-          ← Retour aux activités
-        </Link>
       </div>
     </div>
   )
 }
 
-export default BucketPage
+export default BucketComponent
