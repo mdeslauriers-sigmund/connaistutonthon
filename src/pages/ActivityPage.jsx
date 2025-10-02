@@ -11,7 +11,7 @@ const ActivityPage = () => {
           Découvrez nos activités interactives pour apprendre tout sur le thon!
         </p>
         
-        <div className="grid md:grid-cols-2 gap-8 mt-12">
+        <div className="grid md:grid-cols-3 gap-8 mt-12">
           <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20">
             <div className="text-5xl mb-4">🧠</div>
             <h3 className="text-2xl font-semibold text-white mb-4">Quiz Thon</h3>
@@ -34,6 +34,20 @@ const ActivityPage = () => {
               className="inline-block bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200"
             >
               Explorer la Migration
+            </Link>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20">
+            <div className="text-5xl mb-4">🍽️</div>
+            <h3 className="text-2xl font-semibold text-white mb-4">Alimentation</h3>
+            <p className="text-wave-light mb-6">
+              Classez les aliments selon qu'ils sont consommés par les jeunes ou les adultes.
+            </p>
+            <Link 
+              to="/bucket"
+              className="inline-block bg-tuna-light hover:bg-tuna-blue text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200"
+            >
+              Classer l'Alimentation
             </Link>
           </div>
         </div>

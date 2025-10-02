@@ -21,3 +21,12 @@
   - Lors de la sélection de la réponse, on affiche une explication
   - Lorsque la réponse est bonne, on affiche un message de succès
   - Lorsque la réponse est mauvaise, on affiche un message de d'échec
+
+### Bucket page
+- Permet à l'utilisateur de catégoriser l'alimentation du thon
+- On lui demande, pour chaque aliment, de déterminer si c'est l'alimentation des jeunes ou des adultes
+  - Les aliments doivent être déplacés en drag n drop
+  - On peut les déposer dans 2 contenants (Adultes et Jeunes)
+    - Lors de la sélection de la réponse, on affiche une explication
+    - Lorsque la réponse est bonne, on affiche un message de succès
+    - Lorsque la réponse est mauvaise, on affiche un message de d'échec

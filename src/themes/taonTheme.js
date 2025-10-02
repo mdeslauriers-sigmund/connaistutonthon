@@ -67,6 +67,66 @@ export const taonTheme = {
         america: 'Amérique',
         africa: 'Afrique'
       }
+    },
+    bucket: {
+      title: 'Alimentation des Taons 🐝🌸',
+      subtitle: 'Découvrez les différences d\'alimentation entre les jeunes et les adultes taons.',
+      containers: {
+        adults: {
+          title: 'Adultes',
+          description: 'Alimentation des taons adultes',
+          color: 'bg-yellow-500/20 border-yellow-500/50'
+        },
+        young: {
+          title: 'Larves',
+          description: 'Alimentation des larves de taons',
+          color: 'bg-orange-500/20 border-orange-500/50'
+        }
+      },
+      foods: [
+        {
+          id: 1,
+          name: 'Nectar',
+          image: '🌸',
+          correctCategory: 'adults',
+          explanation: 'Les taons adultes se nourrissent principalement de nectar de fleurs.'
+        },
+        {
+          id: 2,
+          name: 'Pollen',
+          image: '🌼',
+          correctCategory: 'adults',
+          explanation: 'Le pollen est une source de protéines importante pour les taons adultes.'
+        },
+        {
+          id: 3,
+          name: 'Sève d\'arbre',
+          image: '🌳',
+          correctCategory: 'adults',
+          explanation: 'Les taons adultes peuvent se nourrir de sève d\'arbres riches en sucres.'
+        },
+        {
+          id: 4,
+          name: 'Débris végétaux',
+          image: '🍃',
+          correctCategory: 'young',
+          explanation: 'Les larves de taons se nourrissent de débris végétaux en décomposition.'
+        },
+        {
+          id: 5,
+          name: 'Micro-organismes',
+          image: '🦠',
+          correctCategory: 'young',
+          explanation: 'Les larves consomment des micro-organismes présents dans leur environnement.'
+        },
+        {
+          id: 6,
+          name: 'Matière organique',
+          image: '🌱',
+          correctCategory: 'young',
+          explanation: 'Les larves se nourrissent de matière organique en décomposition.'
+        }
+      ]
     }
   }
 }

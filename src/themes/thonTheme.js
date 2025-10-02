@@ -67,6 +67,66 @@ export const thonTheme = {
         america: 'Amérique',
         africa: 'Afrique'
       }
+    },
+    bucket: {
+      title: 'Alimentation du Thon 🐟🍽️',
+      subtitle: 'Découvrez les différences d\'alimentation entre les jeunes et les adultes thons.',
+      containers: {
+        adults: {
+          title: 'Adultes',
+          description: 'Alimentation des thons adultes',
+          color: 'bg-blue-500/20 border-blue-500/50'
+        },
+        young: {
+          title: 'Jeunes',
+          description: 'Alimentation des jeunes thons',
+          color: 'bg-green-500/20 border-green-500/50'
+        }
+      },
+      foods: [
+        {
+          id: 1,
+          name: 'Plancton',
+          image: '🦠',
+          correctCategory: 'young',
+          explanation: 'Les jeunes thons se nourrissent principalement de plancton, plus facile à capturer.'
+        },
+        {
+          id: 2,
+          name: 'Petits poissons',
+          image: '🐟',
+          correctCategory: 'young',
+          explanation: 'Les jeunes thons chassent de petits poissons adaptés à leur taille.'
+        },
+        {
+          id: 3,
+          name: 'Crustacés',
+          image: '🦐',
+          correctCategory: 'young',
+          explanation: 'Les crustacés sont une source de nourriture importante pour les jeunes thons.'
+        },
+        {
+          id: 4,
+          name: 'Maquereaux',
+          image: '🐟',
+          correctCategory: 'adults',
+          explanation: 'Les thons adultes chassent des maquereaux, des proies plus grosses et énergétiques.'
+        },
+        {
+          id: 5,
+          name: 'Sardines',
+          image: '🐟',
+          correctCategory: 'adults',
+          explanation: 'Les sardines sont une proie favorite des thons adultes en bancs.'
+        },
+        {
+          id: 6,
+          name: 'Anchois',
+          image: '🐟',
+          correctCategory: 'adults',
+          explanation: 'Les anchois constituent une part importante de l\'alimentation des thons adultes.'
+        }
+      ]
     }
   }
 }

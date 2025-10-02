@@ -3,6 +3,7 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import HomePage from './pages/HomePage'
 import ActivityPage from './pages/ActivityPage'
 import MigrationPage from './pages/MigrationPage'
+import BucketPage from './pages/BucketPage'
 import Layout from './components/Layout'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/activities" element={<ActivityPage />} />
             <Route path="/migration" element={<MigrationPage />} />
+            <Route path="/bucket" element={<BucketPage />} />
           </Routes>
         </Layout>
       </Router>
