@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 import { useAchievements } from '../contexts/AchievementContext'
 import { useSequenceState } from '../hooks/useSequenceState'
@@ -6,10 +6,13 @@ import AssociationComponent from '../components/AssociationComponent'
 import MigrationComponent from '../components/MigrationComponent'
 import BucketComponent from '../components/BucketComponent'
 import ProgressBar from '../components/ProgressBar'
+import '../styles/transitions.css'
 
 const SequencePage = () => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const { checkActivityCompletion, checkSequenceCompletion } = useAchievements()
+  const [transitionStage, setTransitionStage] = useState('fadeIn')
+  const [displayActivityIndex, setDisplayActivityIndex] = useState(0)
 
   const activities = theme.content.sequence.activities
 
@@ -24,6 +27,20 @@ const SequencePage = () => {
     handleRestartSequence,
     getScoreMessage,
   } = useSequenceState(activities, theme)
+
+  // Détecter le changement d'activité pour déclencher la transition
+  useEffect(() => {
+    if (currentActivityIndex !== displayActivityIndex) {
+      setTransitionStage('fadeOut')
+    }
+  }, [currentActivityIndex, displayActivityIndex])
+
+  const onAnimationEnd = () => {
+    if (transitionStage === 'fadeOut') {
+      setTransitionStage('fadeIn')
+      setDisplayActivityIndex(currentActivityIndex)
+    }
+  }
 
   // Enhanced activity completion handler that includes achievement checks
   const handleActivityComplete = (score) => {
@@ -48,44 +65,60 @@ const SequencePage = () => {
     }
   }
 
-  // Afficher l'activité en cours
+  // Afficher l'activité en cours avec transition
   if (showActivity) {
-    if (currentActivity.id === 'association') {
-      return (
-        <AssociationComponent
-          onComplete={handleActivityComplete}
-          currentIndex={currentActivityIndex}
-          totalItems={activities.length}
-          totalScore={totalScore}
-          maxScore={theme.content.sequence.conclusion.totalMaxScore}
-        />
-      )
-    } else if (currentActivity.id === 'migration') {
-      return (
-        <MigrationComponent
-          onComplete={handleActivityComplete}
-          currentIndex={currentActivityIndex}
-          totalItems={activities.length}
-          totalScore={totalScore}
-          maxScore={theme.content.sequence.conclusion.totalMaxScore}
-        />
-      )
-    } else if (currentActivity.id === 'bucket') {
-      return (
-        <BucketComponent
-          onComplete={handleActivityComplete}
-          currentIndex={currentActivityIndex}
-          totalItems={activities.length}
-          totalScore={totalScore}
-          maxScore={theme.content.sequence.conclusion.totalMaxScore}
-        />
-      )
+    const ActivityComponent = () => {
+      const displayActivity = activities[displayActivityIndex]
+      
+      if (displayActivity.id === 'association') {
+        return (
+          <AssociationComponent
+            onComplete={handleActivityComplete}
+            currentIndex={displayActivityIndex}
+            totalItems={activities.length}
+            totalScore={totalScore}
+            maxScore={theme.content.sequence.conclusion.totalMaxScore}
+          />
+        )
+      } else if (displayActivity.id === 'migration') {
+        return (
+          <MigrationComponent
+            onComplete={handleActivityComplete}
+            currentIndex={displayActivityIndex}
+            totalItems={activities.length}
+            totalScore={totalScore}
+            maxScore={theme.content.sequence.conclusion.totalMaxScore}
+          />
+        )
+      } else if (displayActivity.id === 'bucket') {
+        return (
+          <BucketComponent
+            onComplete={handleActivityComplete}
+            currentIndex={displayActivityIndex}
+            totalItems={activities.length}
+            totalScore={totalScore}
+            maxScore={theme.content.sequence.conclusion.totalMaxScore}
+          />
+        )
+      }
     }
+
+    return (
+      <div
+        className={`page-transition ${transitionStage}`}
+        onAnimationEnd={onAnimationEnd}
+      >
+        <ActivityComponent />
+      </div>
+    )
   }
 
   if (isCompleted) {
     return (
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-white">
+      <div 
+        className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-white page-transition ${transitionStage}`}
+        onAnimationEnd={onAnimationEnd}
+      >
         <div className="text-center">
           <h1 className={`text-4xl md:text-5xl font-normal mb-6 text-${getTextColor()} font-molle`}>
             {theme.content.sequence.conclusion.title}
