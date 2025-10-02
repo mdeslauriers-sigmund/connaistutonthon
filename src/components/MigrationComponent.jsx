@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import WorldMap from './WorldMap'
 
 const MigrationComponent = ({ onComplete }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [selectedPoint, setSelectedPoint] = useState(null)
+  const [selectedArea, setSelectedArea] = useState(null)
   const [showResult, setShowResult] = useState(false)
   const [score, setScore] = useState(0)
 
   const questions = theme.content.migration.questions
 
-  const handlePointClick = (x, y) => {
+  const handleAreaSelect = (areaId) => {
     if (showResult) return
-    
-    setSelectedPoint({ x, y })
+
+    setSelectedArea(areaId)
     setShowResult(true)
-    
+
     const currentQ = questions[currentQuestion]
-    const isCorrect = Math.abs(x - currentQ.correctAnswer.x) < 10 && Math.abs(y - currentQ.correctAnswer.y) < 10
-    
+    const isCorrect = areaId === currentQ.correctAnswer.area
+
     if (isCorrect) {
       setScore(score + 1)
     }
@@ -27,7 +28,7 @@ const MigrationComponent = ({ onComplete }) => {
   const nextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1)
-      setSelectedPoint(null)
+      setSelectedArea(null)
       setShowResult(false)
     } else {
       // Quiz terminé, déclencher le passage automatique
@@ -44,13 +45,13 @@ const MigrationComponent = ({ onComplete }) => {
 
   const resetQuiz = () => {
     setCurrentQuestion(0)
-    setSelectedPoint(null)
+    setSelectedArea(null)
     setShowResult(false)
     setScore(0)
   }
 
   const currentQ = questions[currentQuestion]
-  const isCorrect = selectedPoint && Math.abs(selectedPoint.x - currentQ.correctAnswer.x) < 10 && Math.abs(selectedPoint.y - currentQ.correctAnswer.y) < 10
+  const isCorrect = selectedArea && selectedArea === currentQ.correctAnswer.area
 
   // Déclencher le passage automatique quand on arrive à la dernière question
   useEffect(() => {
@@ -59,7 +60,7 @@ const MigrationComponent = ({ onComplete }) => {
       const timer = setTimeout(() => {
         onComplete(score)
       }, 3000)
-      
+
       return () => clearTimeout(timer)
     }
   }, [currentQuestion, showResult, score, onComplete])
@@ -75,7 +76,7 @@ const MigrationComponent = ({ onComplete }) => {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="space-y-8">
         {/* Question Panel */}
         <div className={`${getCardClasses()}`}>
           <div className="text-center mb-6">
@@ -140,37 +141,15 @@ const MigrationComponent = ({ onComplete }) => {
           <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
             {theme.content.migration.mapTitle}
           </h3>
-          <div className="relative bg-gradient-to-b from-blue-900 to-blue-800 rounded-lg p-4 min-h-[400px] border-2 border-blue-300/30">
-            {/* Map Grid */}
-            <div className="absolute inset-4 grid grid-cols-10 grid-rows-10 gap-1">
-              {Array.from({ length: 100 }).map((_, index) => {
-                const x = (index % 10) * 10
-                const y = Math.floor(index / 10) * 10
-                const isSelected = selectedPoint && selectedPoint.x === x && selectedPoint.y === y
-                const isCorrectPoint = currentQ.correctAnswer.x === x && currentQ.correctAnswer.y === y
-                
-                return (
-                  <div
-                    key={index}
-                    className={`
-                      border border-blue-400/30 cursor-pointer transition-all duration-200 hover:bg-blue-300/20
-                      ${isSelected ? 'bg-tuna-light' : ''}
-                      ${showResult && isCorrectPoint ? 'bg-green-400' : ''}
-                      ${showResult && isSelected && !isCorrect ? 'bg-red-400' : ''}
-                    `}
-                    onClick={() => handlePointClick(x, y)}
-                    style={{ minHeight: '20px' }}
-                  />
-                )
-              })}
-            </div>
-            
-            {/* Map Labels */}
-            <div className="absolute top-2 left-2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.north}</div>
-            <div className="absolute bottom-2 left-2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.south}</div>
-            <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.europe}</div>
-            <div className="absolute top-2 right-2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.america}</div>
-            <div className="absolute bottom-2 right-2 text-blue-200 text-xs font-bold">{theme.content.migration.mapLabels.africa}</div>
+          <div className="relative bg-gradient-to-b from-blue-900 to-blue-800 rounded-lg overflow-hidden min-h-[400px] border-2 border-blue-300/30">
+            <WorldMap
+              selectedArea={selectedArea}
+              onAreaSelect={handleAreaSelect}
+              showResult={showResult}
+              correctArea={currentQ.correctAnswer.area}
+              isCorrect={isCorrect}
+              theme={theme}
+            />
           </div>
         </div>
       </div>

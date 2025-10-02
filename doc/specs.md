@@ -18,6 +18,15 @@
 - Permet à l'utilisateur de mieux connaître la migration du thon
 - On lui demande ou est le thon de l'atlantique en été et en hiver
 - L'utilisateur doit sélectionner le bon point parmi une série de point sur la carte
+  - La carte est une illustratoin svg des continents et des océans. Il y a un path svg spécifique pour différentes étendues d'eau:
+    - Océan Atlantique (côte nord-est)
+    - Océan Atlantique (côte européenne)
+    - Océan Atlantique (côte africaine)
+    - Océan Atlantique (côté d'amérique du sud)
+    - Golf du Mexique
+    - Méditérannée
+    - Arctique
+    - Japon
   - Lors de la sélection de la réponse, on affiche une explication
   - Lorsque la réponse est bonne, on affiche un message de succès
   - Lorsque la réponse est mauvaise, on affiche un message de d'échec
