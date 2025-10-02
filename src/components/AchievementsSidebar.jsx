@@ -87,7 +87,7 @@ const AchievementsSidebar = ({ isOpen, onClose }) => {
         <div className="sidebar-content">
           {/* Stats */}
           <div className={`${getCardClasses()} p-4 mb-6`}>
-            <div className="grid grid-cols-2 gap-4 text-center">
+            <div className="text-center">
               <div>
                 <div className={`text-3xl font-bold text-${getTextColor()}`}>
                   {unlockedAchievements.length}/{achievements.length}
@@ -95,15 +95,7 @@ const AchievementsSidebar = ({ isOpen, onClose }) => {
                 <div className={`text-sm text-${getTextSecondaryColor()}`}>
                   Débloqués
                 </div>
-              </div>
-              <div>
-                <div className={`text-3xl font-bold text-${getTextColor()}`}>
-                  {progress.totalScore || 0}
-                </div>
-                <div className={`text-sm text-${getTextSecondaryColor()}`}>
-                  Score Total
-                </div>
-              </div>
+              </div>              
             </div>
           </div>
 
