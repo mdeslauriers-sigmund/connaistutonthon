@@ -25,8 +25,24 @@ const SequencePage = () => {
     currentActivity,
     handleActivityComplete: originalHandleActivityComplete,
     handleRestartSequence,
+    resetSequence,
     getScoreMessage,
   } = useSequenceState(activities, theme)
+
+  // Réinitialiser la séquence quand le composant se monte
+  useEffect(() => {
+    // Vérifier si on revient sur la page séquence alors qu'elle était complétée
+    const savedScores = localStorage.getItem('sequenceScores')
+    if (savedScores) {
+      const parsedScores = JSON.parse(savedScores)
+      const allCompleted = activities.every(activity => parsedScores[activity.id] !== undefined)
+      
+      if (allCompleted) {
+        // La séquence était complétée, on la réinitialise
+        resetSequence()
+      }
+    }
+  }, []) // Exécuté uniquement au montage du composant
 
   // Détecter le changement d'activité pour déclencher la transition
   useEffect(() => {

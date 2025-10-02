@@ -80,6 +80,15 @@ export const useSequenceState = (activities, theme) => {
     localStorage.removeItem('sequenceScores')
   }
 
+  const resetSequence = () => {
+    setScores({})
+    setTotalScore(0)
+    setCurrentActivityIndex(0)
+    setIsCompleted(false)
+    setShowActivity(false)
+    localStorage.removeItem('sequenceScores')
+  }
+
   const getScoreMessage = () => {
     const percentage = (totalScore / theme.content.sequence.conclusion.totalMaxScore) * 100
     
@@ -103,6 +112,7 @@ export const useSequenceState = (activities, theme) => {
     handleActivityComplete,
     handleNextActivity,
     handleRestartSequence,
+    resetSequence,
     getScoreMessage,
   }
 }

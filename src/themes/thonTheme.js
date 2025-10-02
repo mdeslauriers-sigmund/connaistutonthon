@@ -95,7 +95,7 @@ export const thonTheme = {
           failureMessage: 'Pas correct ! En hiver, le thon migre vers les eaux plus chaudes du sud, car c\'est la conditoin propice à sa reproduction.'
         }
       ],
-      mapTitle: 'Carte de l\'Atlantique',
+      mapTitle: 'Carte des océans',
       mapLabels: {
         north: 'Nord',
         south: 'Sud',
