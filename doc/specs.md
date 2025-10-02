@@ -14,6 +14,13 @@
 ### Activity page
 - TODO : doc
 
+### Sequence page
+- Permet de parcourir les pages d'activité de façon séquentielle en comptabilisant le score accumulé au travers des activités
+- Séquence initiale : 
+  1. Migration page
+  2. Bucket page
+- À la fin de la séquence, diriger l'utilisateur vers une page de conclusion affichant le score total
+
 ### Migration component
 - Permet à l'utilisateur de mieux connaître la migration du thon
 - On lui demande ou est le thon de l'atlantique en été et en hiver
@@ -31,9 +38,9 @@
     - Lorsque la réponse est bonne, on affiche un message de succès
     - Lorsque la réponse est mauvaise, on affiche un message de d'échec
 
-### Sequence page
-- Permet de parcourir les pages d'activité de façon séquentielle en comptabilisant le score accumulé au travers des activités
-- Séquence initiale : 
-  1. Migration page
-  2. Bucket page
-- À la fin de la séquence, diriger l'utilisateur vers une page de conclusion affichant le score total
+### Achievements
+- Permet à l'utilisateur de gagner des badges lors de diverses actions
+  - Les badges font partie d'une liste prédéterminée
+  - L'état est stocké dans le local-storage de l'utilisateur
+  - Une classe achievementManager permet de gérer les différentes actions nécessaires
+  - Lors de l'obtention d'un achievement : affiche un toast "Achievement unlocked"
