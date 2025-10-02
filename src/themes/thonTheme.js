@@ -1,8 +1,10 @@
 import bancThonImage from '../assets/img/banc-thon.jpg'
+import basketImage from '../assets/img/basket.png'
 export const thonTheme = {
   name: 'Thon',
   icon: 'tuna',
   backgroundImage: bancThonImage,
+  basketImage: basketImage,
   colors: {
     primary: 'tuna-blue',
     secondary: 'tuna-light',

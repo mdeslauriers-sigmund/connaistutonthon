@@ -152,27 +152,34 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
       <div className="grid md:grid-cols-[1fr_auto_1fr] gap-6 mb-8">
         {/* Conteneur Adultes (Gauche) */}
         <div
-          className={`${getCardClasses()} min-h-[400px] transition-all duration-300 ${theme.content.bucket.containers.adults.color}`}
+          className={`${getCardClasses()} min-h-[400px] transition-all duration-300 ${theme.content.bucket.containers.adults.color} bg-contain bg-no-repeat bg-bottom`}
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'adults')}
         >
-          <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
-            {theme.content.bucket.containers.adults.title}
-          </h3>
-          <p className={`text-sm text-center mb-4 text-${getTextSecondaryColor()}`}>
-            {theme.content.bucket.containers.adults.description}
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            {containers.adults.map((food) => (
-              <div
-                key={food.id}
-                className={`${getCardClasses()} p-3 text-center`}
-              >
-                <div className="text-2xl mb-1">{food.image}</div>
-                <div className={`text-xs text-${getTextColor()}`}>{food.name}</div>
-              </div>
-            ))}
+          <div className="absolute inset-0 bg-contain bg-no-repeat bg-bottom opacity-40"
+            style={{
+              backgroundImage: `url(${theme.basketImage})`,
+            }}></div>
+          <div class="relative">
+            <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
+              {theme.content.bucket.containers.adults.title}
+            </h3>
+            <p className={`text-sm text-center mb-4 text-${getTextSecondaryColor()}`}>
+              {theme.content.bucket.containers.adults.description}
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              {containers.adults.map((food) => (
+                <div
+                  key={food.id}
+                  className={`${getCardClasses()} p-3 text-center`}
+                >
+                  <div className="text-2xl mb-1">{food.image}</div>
+                  <div className={`text-xs text-${getTextColor()}`}>{food.name}</div>
+                </div>
+              ))}
+            </div>
           </div>
+
         </div>
 
         {/* Aliments à classer (Centre) */}
@@ -201,23 +208,30 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'young')}
         >
-          <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
-            {theme.content.bucket.containers.young.title}
-          </h3>
-          <p className={`text-sm text-center mb-4 text-${getTextSecondaryColor()}`}>
-            {theme.content.bucket.containers.young.description}
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            {containers.young.map((food) => (
-              <div
-                key={food.id}
-                className={`${getCardClasses()} p-3 text-center`}
-              >
-                <div className="text-2xl mb-1">{food.image}</div>
-                <div className={`text-xs text-${getTextColor()}`}>{food.name}</div>
-              </div>
-            ))}
+          <div className="absolute inset-0 bg-contain bg-no-repeat bg-bottom opacity-40"
+            style={{
+              backgroundImage: `url(${theme.basketImage})`,
+            }}></div>
+          <div class="relative">
+            <h3 className={`text-xl font-bold mb-4 text-center text-${getTextColor()}`}>
+              {theme.content.bucket.containers.young.title}
+            </h3>
+            <p className={`text-sm text-center mb-4 text-${getTextSecondaryColor()}`}>
+              {theme.content.bucket.containers.young.description}
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              {containers.young.map((food) => (
+                <div
+                  key={food.id}
+                  className={`${getCardClasses()} p-3 text-center`}
+                >
+                  <div className="text-2xl mb-1">{food.image}</div>
+                  <div className={`text-xs text-${getTextColor()}`}>{food.name}</div>
+                </div>
+              ))}
+            </div>
           </div>
+
         </div>
       </div>
 
