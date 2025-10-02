@@ -18,25 +18,57 @@ export const thonTheme = {
     footer: 'bg-white/5 border-white/20'
   },
   content: {
-    title: 'Bienvenue dans l\'univers du Thon!',
-    subtitle: 'Découvrez les mystères des océans et testez vos connaissances sur l\'un des poissons les plus fascinants de la planète.',
-    features: [
-      {
-        icon: '🌊',
-        title: 'Exploration',
-        description: 'Plongez dans les profondeurs océaniques et découvrez l\'habitat naturel du thon.'
-      },
-      {
-        icon: '🧠',
-        title: 'Apprentissage',
-        description: 'Testez vos connaissances avec nos quiz interactifs sur la biologie marine.'
-      },
-      {
-        icon: '🎯',
-        title: 'Défis',
-        description: 'Relevez des défis amusants et devenez un expert en ichtyologie.'
-      }
-    ],
+    title: 'Connais-tu ton thon ?',
+    subtitle: 'Découvre les secrets du thon rouge de l’Atlantique Ouest à travers des jeux interactifs amusants et remplis de surprises!',
+    hero: {
+      icon: '🌊',
+      title: 'Exploration',
+      description: 'Plongez dans les profondeurs océaniques et découvrez l\'habitat naturel du thon.'
+    },
+    activities: {
+      title: 'Les jeux à découvrir',
+      features: [
+        {
+          icon: '🌊',
+          title: 'Migration',
+          description: 'Place les thons rouges au bon endroit selon la saison.'
+        },
+        {
+          icon: '🍽️',
+          title: 'À table!',
+          description: 'Devine ce que mangent les jeunes thons et les adultes.'
+        },
+        {
+          icon: '🌊',
+          title: 'Océan fragile',
+          description: 'Associe les événements aux impacts sur leur environnement.'
+        },
+        {
+          icon: '🧠',
+          title: 'Thon Quiz Aventure',
+          description: 'Un parcours interactif avec 3 vies pour tester tes connaissances.'
+        }
+      ]
+    },
+    trophies: {
+      title: 'Gagne des succès',
+      subtitle: 'Plus tu joues, plus tu débloques des achievements :',
+      features: [
+        {
+          icon: '🏆',
+          title: 'Terminer tous les jeux',
+        },
+        {
+          icon: '🎯',
+          title: 'Réussir un défi sans faute',
+        },
+        {
+          icon: '🐟✨',
+          title: 'Découvrir des trésors cachés',
+        }
+      ],
+      footer: 'Arriveras-tu à tous les collectionner?',
+    },
     footer: 'Découvrez le monde fascinant du thon',
     migration: {
       title: 'Migration du Thon rouge de l\'Atlantique ouest 🐟🌊',

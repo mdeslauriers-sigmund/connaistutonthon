@@ -20,23 +20,55 @@ export const taonTheme = {
   content: {
     title: 'Bienvenue dans l\'univers des Taons!',
     subtitle: 'Explorez le monde merveilleux des taons et découvrez leur rôle essentiel dans notre écosystème.',
-    features: [
-      {
-        icon: '🌸',
-        title: 'Pollinisation',
-        description: 'Découvrez comment les taons pollinisent les fleurs et maintiennent la biodiversité.'
-      },
-      {
-        icon: '🍯',
-        title: 'Production',
-        description: 'Apprenez comment les taons produisent le miel et organisent leur ruche.'
-      },
-      {
-        icon: '🏠',
-        title: 'Habitat',
-        description: 'Explorez la structure complexe de la ruche et la vie sociale des taons.'
-      }
-    ],
+    hero: {
+      icon: '🌸',
+      title: 'Exploration',
+      description: 'Plongez dans les jardins fleuris et découvrez l\'habitat naturel du taon.'
+    },
+    activities: {
+      title: 'Les jeux à découvrir',
+      features: [
+        {
+          icon: '🌸',
+          title: 'Migration',
+          description: 'Place les taons au bon endroit selon la saison.'
+        },
+        {
+          icon: '🍽️',
+          title: 'À table!',
+          description: 'Devine ce que mangent les jeunes taons et les adultes.'
+        },
+        {
+          icon: '🌺',
+          title: 'Pollinisation fragile',
+          description: 'Associe les événements aux impacts sur leur environnement.'
+        },
+        {
+          icon: '🧠',
+          title: 'Thon Quiz Aventure',
+          description: 'Un parcours interactif avec 3 vies pour tester tes connaissances.'
+        }
+      ]
+    },
+    trophies: {
+      title: 'Gagne des succès',
+      subtitle: 'Plus tu joues, plus tu débloques des achievements :',
+      features: [
+        {
+          icon: '🏆',
+          title: 'Terminer tous les jeux',
+        },
+        {
+          icon: '🎯',
+          title: 'Réussir un défi sans faute',
+        },
+        {
+          icon: '🐝✨',
+          title: 'Découvrir des trésors cachés',
+        }
+      ],
+      footer: 'Arriveras-tu à tous les collectionner?',
+    },
     footer: 'Découvrez le monde fascinant des taons',
     migration: {
       title: 'Migration des Taons 🐝🌸',

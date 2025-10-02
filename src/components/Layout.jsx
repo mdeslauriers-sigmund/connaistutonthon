@@ -8,21 +8,21 @@ const Layout = ({ children }) => {
 
   return (
     <div className={`min-h-screen transition-all duration-500 ${getBackgroundClasses()}`}>
-      <header className={getHeaderClasses()}>
+      <header className={`${getHeaderClasses()} absolute top-0 inset-x-0 z-10`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+          <div className="flex justify-between items-center py-2">
             <Link
               to="/"
               className={`flex items-center space-x-2 text-3xl transition-colors duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()} font-molle`}
             >
-              <Icon name={theme.icon} size="w-8 h-8" />
+              <Icon name={theme.icon} size="size-14" />
               <span>Connais-tu ton {theme.name} ?</span>
             </Link>
 
             <div className="flex items-center space-x-4">
               <Link
                 to="/achievements"
-                className={`text-2xl transition-all duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()} hover:scale-110 transform`}
+                className={`text-4xl transition-all duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()} hover:scale-110 transform`}
                 title="Voir mes achievements"
               >
                 🏆
