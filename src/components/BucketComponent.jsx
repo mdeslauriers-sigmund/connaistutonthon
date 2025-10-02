@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import ProgressBar from './ProgressBar'
 
-const BucketComponent = ({ onComplete }) => {
+const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalScore = 0, maxScore = 8 }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const [draggedItem, setDraggedItem] = useState(null)
   const [containers, setContainers] = useState({
@@ -13,7 +14,7 @@ const BucketComponent = ({ onComplete }) => {
   const [gameCompleted, setGameCompleted] = useState(false)
 
   const foods = theme.content.bucket.foods
-  const totalItems = foods.length
+  const totalFoods = foods.length
 
   const handleDragStart = (e, food) => {
     setDraggedItem(food)
@@ -54,16 +55,15 @@ const BucketComponent = ({ onComplete }) => {
     }
 
     setDraggedItem(null)
-  }
-
-  const checkGameCompletion = () => {
-    const totalPlaced = containers.adults.length + containers.young.length
-    if (totalPlaced === totalItems) {
+    
+    // Vérifier automatiquement si tous les items sont placés
+    const totalPlaced = newContainers.adults.length + newContainers.young.length
+    if (totalPlaced === totalFoods) {
       setGameCompleted(true)
-      // Déclencher le passage automatique
-      triggerAutoComplete()
     }
   }
+
+  // Fonction supprimée - la vérification se fait automatiquement dans handleDrop
 
   const triggerAutoComplete = () => {
     // Attendre 3 secondes puis passer à l'activité suivante
@@ -96,8 +96,24 @@ const BucketComponent = ({ onComplete }) => {
     }
   }, [gameCompleted, score, onComplete])
 
+  const currentActivity = {
+    id: 'bucket',
+    title: theme.content.bucket.title,
+    description: theme.content.bucket.subtitle,
+    icon: '🍽️'
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* ProgressBar */}
+      <ProgressBar 
+        currentIndex={currentIndex}
+        totalItems={totalItems}
+        currentActivity={currentActivity}
+        totalScore={totalScore}
+        maxScore={maxScore}
+      />
+
       <div className="text-center mb-8">
         <h1 className={`text-4xl md:text-5xl font-bold mb-6 text-${getTextColor()}`}>
           {theme.content.bucket.title}
@@ -151,9 +167,7 @@ const BucketComponent = ({ onComplete }) => {
             {containers.adults.map((food) => (
               <div 
                 key={food.id}
-                className={`${getCardClasses()} p-3 text-center cursor-move`}
-                draggable
-                onDragStart={(e) => handleDragStart(e, food)}
+                className={`${getCardClasses()} p-3 text-center`}
               >
                 <div className="text-2xl mb-1">{food.image}</div>
                 <div className={`text-xs text-${getTextColor()}`}>{food.name}</div>
@@ -178,9 +192,7 @@ const BucketComponent = ({ onComplete }) => {
             {containers.young.map((food) => (
               <div 
                 key={food.id}
-                className={`${getCardClasses()} p-3 text-center cursor-move`}
-                draggable
-                onDragStart={(e) => handleDragStart(e, food)}
+                className={`${getCardClasses()} p-3 text-center`}
               >
                 <div className="text-2xl mb-1">{food.image}</div>
                 <div className={`text-xs text-${getTextColor()}`}>{food.name}</div>
@@ -212,28 +224,20 @@ const BucketComponent = ({ onComplete }) => {
 
       {/* Actions */}
       <div className="text-center">
-        {gameCompleted ? (
+        {gameCompleted && (
           <div className="mb-6">
             <div className={`${getCardClasses()} p-6`}>
               <h3 className={`text-2xl font-bold mb-4 text-${getTextColor()}`}>
                 🎉 Jeu terminé !
               </h3>
               <p className={`text-lg mb-4 text-${getTextSecondaryColor()}`}>
-                Score final: {score}/{totalItems} ({Math.round((score/totalItems) * 100)}%)
+                Score final: {score}/{totalFoods} ({Math.round((score/totalFoods) * 100)}%)
               </p>
               <p className={`text-sm text-${getTextSecondaryColor()}`}>
                 Passage automatique à l'activité suivante...
               </p>
             </div>
           </div>
-        ) : (
-          <button
-            onClick={checkGameCompletion}
-            className={`${getButtonClasses()} mr-4`}
-            disabled={containers.adults.length + containers.young.length === 0}
-          >
-            Vérifier
-          </button>
         )}
       </div>
     </div>

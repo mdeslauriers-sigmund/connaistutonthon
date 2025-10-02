@@ -1,11 +1,18 @@
 import { useTheme } from '../contexts/ThemeContext'
+import { useAchievements } from '../contexts/AchievementContext'
 
 const ThemeToggle = () => {
   const { theme, toggleTheme, isOcean, isBee } = useTheme()
+  const { checkThemeChange } = useAchievements()
+
+  const handleToggle = () => {
+    toggleTheme()
+    checkThemeChange()
+  }
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={handleToggle}
       className={`
         relative inline-flex items-center px-4 py-2 rounded-lg font-medium transition-all duration-300
         ${isOcean 

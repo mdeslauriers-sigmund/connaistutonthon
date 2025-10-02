@@ -30,7 +30,7 @@ const HomePage = () => {
         
         <div className="mt-12">
           <Link 
-            to="/activities" 
+            to="/sequence" 
             className={`inline-block ${getButtonClasses()}`}
           >
             Commencer l'aventure

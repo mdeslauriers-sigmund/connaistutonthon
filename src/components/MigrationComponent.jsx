@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 import WorldMap from './WorldMap'
+import ProgressBar from './ProgressBar'
 
-const MigrationComponent = ({ onComplete }) => {
+const MigrationComponent = ({ onComplete, currentIndex = 0, totalItems = 2, totalScore = 0, maxScore = 8 }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [selectedArea, setSelectedArea] = useState(null)
@@ -64,6 +65,13 @@ const MigrationComponent = ({ onComplete }) => {
       return () => clearTimeout(timer)
     }
   }, [currentQuestion, showResult, score, onComplete])
+
+  const currentActivity = {
+    id: 'migration',
+    title: theme.content.migration.title,
+    description: theme.content.migration.subtitle,
+    icon: '🌊'
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
