@@ -157,15 +157,27 @@ const AchievementsSidebar = ({ isOpen, onClose }) => {
                   >
                     <div className="flex items-start space-x-3">
                       <div className="text-3xl flex-shrink-0 grayscale">
-                        {achievement.icon}
+                        {achievement.hidden ? '❔' : achievement.icon}
                       </div>
                       <div className="flex-1">
-                        <h4 className={`font-bold text-${getTextColor()}`}>
-                          {achievement.title}
-                        </h4>
-                        <p className={`text-sm text-${getTextSecondaryColor()}`}>
-                          {achievement.description}
-                        </p>
+                        {achievement.hidden ? (
+                          <>
+                            <div className="h-5 bg-gray-300/30 rounded mb-2 w-3/4 animate-pulse"></div>
+                            <div className="space-y-1">
+                              <div className="h-3 bg-gray-300/20 rounded w-full animate-pulse"></div>
+                              <div className="h-3 bg-gray-300/20 rounded w-5/6 animate-pulse"></div>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <h4 className={`font-bold text-${getTextColor()}`}>
+                              {achievement.title}
+                            </h4>
+                            <p className={`text-sm text-${getTextSecondaryColor()}`}>
+                              {achievement.description}
+                            </p>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>

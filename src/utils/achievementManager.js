@@ -59,6 +59,14 @@ export const ACHIEVEMENTS = {
     icon: '🎨',
     category: 'exploration'
   },
+  BIG_IN_JAPAN: {
+    id: 'big_in_japan',
+    title: 'Big in Japan',
+    description: 'Objectif caché',
+    icon: '⛩️',
+    category: 'exploration',
+    hidden: true
+  },
   QUICK_LEARNER: {
     id: 'quick_learner',
     title: 'Apprenant rapide',
@@ -203,7 +211,7 @@ class AchievementManager {
    * @returns {Array} - Array of all achievements
    */
   getAllAchievements() {
-    return Object.values(ACHIEVEMENTS)
+    return Object.values(ACHIEVEMENTS).sort((a, b) => a.hidden ? 1 : b.hidden ? -1 : 0)
   }
 
   /**
@@ -261,6 +269,12 @@ class AchievementManager {
   checkThemeChange() {
     this.unlock(ACHIEVEMENTS.THEME_EXPLORER.id)
   }
+
+  checkBigInJapan(areaId) {
+    if(areaId === 'japan') {
+      this.unlock(ACHIEVEMENTS.BIG_IN_JAPAN.id)
+    }
+  } 
 }
 
 // Export singleton instance
