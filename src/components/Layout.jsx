@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import { useAchievements } from '../contexts/AchievementContext'
 import ThemeToggle from './ThemeToggle'
 import AchievementsSidebar from './AchievementsSidebar'
 import Icon from './Icon'
 
 const Layout = ({ children }) => {
   const { theme, getBackgroundClasses, getHeaderClasses, getFooterClasses, getTextColor, getTextSecondaryColor } = useThemeConfig()
+  const { getProgress } = useAchievements()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  
+  const progress = getProgress()
+  const hasAchievements = progress.unlocked > 0
 
   return (
     <div className={`min-h-screen transition-all duration-500 ${getBackgroundClasses()}`}>
@@ -23,13 +28,15 @@ const Layout = ({ children }) => {
             </Link>
 
             <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setIsSidebarOpen(true)}
-                className={`text-4xl transition-all duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()} hover:scale-110 transform cursor-pointer`}
-                title="Voir mes achievements"
-              >
-                🏆
-              </button>
+              {hasAchievements && (
+                <button
+                  onClick={() => setIsSidebarOpen(true)}
+                  className={`text-4xl transition-all duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()} hover:scale-110 transform cursor-pointer`}
+                  title="Voir mes achievements"
+                >
+                  🏆
+                </button>
+              )}
             </div>
           </div>
         </div>

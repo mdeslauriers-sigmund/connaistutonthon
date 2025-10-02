@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useThemeConfig } from '../hooks/useThemeConfig'
 import Icon from '../components/Icon'
-import bancThonImage from '../assets/img/banc-thon.jpg'
 
 const HomePage = () => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
@@ -10,7 +9,7 @@ const HomePage = () => {
     <div
       className="relative min-h-screen bg-cover bg-center bg-no-repeat pt-16 after:bg-ocean-deep/40 after:absolute after:inset-0"
       style={{
-        backgroundImage: `url(${bancThonImage})`,
+        backgroundImage: `url(${theme.backgroundImage})`,
       }}
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 pt-12 pb-24 text-center">
