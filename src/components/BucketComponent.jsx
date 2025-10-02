@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import { useAchievements } from '../contexts/AchievementContext'
 import ProgressBar from './ProgressBar'
 import FishTransition from './FishTransition'
 
 const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalScore = 0, maxScore = 8 }) => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
+  const { unlockAchievement } = useAchievements()
   const [draggedItem, setDraggedItem] = useState(null)
   const [containers, setContainers] = useState({
     adults: [],
@@ -62,6 +64,11 @@ const BucketComponent = ({ onComplete, currentIndex = 1, totalItems = 2, totalSc
     const totalPlaced = newContainers.adults.length + newContainers.young.length
     if (totalPlaced === totalFoods) {
       setGameCompleted(true)
+      
+      // Débloquer l'achievement "Le Cocothon" si tous les items sont dans le même panier
+      if (newContainers.adults.length === totalFoods || newContainers.young.length === totalFoods) {
+        unlockAchievement('le_cocothon')
+      }
     }
   }
 
