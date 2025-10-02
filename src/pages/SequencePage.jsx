@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useThemeConfig } from '../hooks/useThemeConfig'
+import { useAchievements } from '../contexts/AchievementContext'
 import MigrationComponent from '../components/MigrationComponent'
 import BucketComponent from '../components/BucketComponent'
 import ProgressBar from '../components/ProgressBar'
 
 const SequencePage = () => {
   const { theme, getTextColor, getTextSecondaryColor, getCardClasses, getButtonClasses } = useThemeConfig()
+  const { checkActivityCompletion, checkSequenceCompletion } = useAchievements()
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0)
   const [scores, setScores] = useState({})
   const [totalScore, setTotalScore] = useState(0)
   const [isCompleted, setIsCompleted] = useState(false)
   const [showActivity, setShowActivity] = useState(false)
+  const [hasCompletedBefore, setHasCompletedBefore] = useState(false)
 
   const activities = theme.content.sequence.activities
   const currentActivity = activities[currentActivityIndex]
@@ -19,6 +22,12 @@ const SequencePage = () => {
   // Charger les scores depuis localStorage
   useEffect(() => {
     const savedScores = localStorage.getItem('sequenceScores')
+    const completedBefore = localStorage.getItem('sequenceCompletedBefore')
+    
+    if (completedBefore) {
+      setHasCompletedBefore(true)
+    }
+    
     if (savedScores) {
       const parsedScores = JSON.parse(savedScores)
       setScores(parsedScores)
@@ -59,6 +68,11 @@ const SequencePage = () => {
 
   const handleActivityComplete = (score) => {
     saveScore(currentActivity.id, score)
+    
+    // Check for activity achievements
+    const isFirstAttempt = !scores[currentActivity.id]
+    checkActivityCompletion(currentActivity.id, score, currentActivity.maxScore, isFirstAttempt)
+    
     setShowActivity(false)
     // Passer directement à l'activité suivante sans étape intermédiaire
     if (currentActivityIndex < activities.length - 1) {
@@ -66,6 +80,16 @@ const SequencePage = () => {
     } else {
       // Toutes les activités sont terminées
       setIsCompleted(true)
+      
+      // Calculate final score including this activity
+      const finalScore = Object.values({ ...scores, [currentActivity.id]: score }).reduce((sum, s) => sum + (s || 0), 0)
+      
+      // Check for sequence achievements
+      const isRetry = hasCompletedBefore
+      checkSequenceCompletion(finalScore, theme.content.sequence.conclusion.totalMaxScore, isRetry)
+      
+      // Mark that sequence has been completed at least once
+      localStorage.setItem('sequenceCompletedBefore', 'true')
     }
   }
 
@@ -85,6 +109,7 @@ const SequencePage = () => {
     setIsCompleted(false)
     setShowActivity(false)
     localStorage.removeItem('sequenceScores')
+    // Keep the completion flag for dedicated learner achievement
   }
 
   const getScoreMessage = () => {
