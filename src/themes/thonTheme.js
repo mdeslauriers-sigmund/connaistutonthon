@@ -13,9 +13,9 @@ export const thonTheme = {
     buttonSecondary: 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
   },
   gradients: {
-    background: 'bg-gradient-to-br from-ocean-deep to-tuna-blue',
-    header: 'bg-white/10 border-white/20',
-    footer: 'bg-white/5 border-white/20'
+    background: 'bg-ocean-deep',
+    header: 'border-white/20',
+    footer: 'text-white border-white/20'
   },
   content: {
     title: 'Connais-tu ton thon ?',
@@ -51,7 +51,7 @@ export const thonTheme = {
       ]
     },
     trophies: {
-      title: 'Gagne des succès',
+      title: 'Gagne des succès !',
       subtitle: 'Plus tu joues, plus tu débloques des achievements :',
       features: [
         {

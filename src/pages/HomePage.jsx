@@ -31,19 +31,19 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="relative z-10 bg-ocean-deep py-12 px-4 sm:px-6 lg:px-16">
+      <div className="relative z-10 bg-ocean-deep py-12 px-4 sm:px-6 lg:px-16 text-center">
         {/* hero */}
         <div className="py-12 opacity-80">
           <h2 className={`text-4xl md:text-6xl font-normal mb-4 transition-colors duration-500 text-${getTextColor()} font-molle`}>
             {theme.content.hero.title}
           </h2>
-          <p className={`text-xl md:text-2xl font-semibold mb-8 max-w-3xl transition-colors duration-500 text-${getTextSecondaryColor()}`}>
+          <p className={`text-xl md:text-2xl mx-auto font-semibold mb-8 max-w-3xl transition-colors duration-500 text-${getTextSecondaryColor()}`}>
             {theme.content.hero.description}
           </p>
         </div>
 
         {/* activities */}
-        <div className="">
+        <div className="text-center">
           <h3 className={`opacity-80 text-4xl md:text-5xl font-normal mb-4 transition-colors duration-500 text-${getTextColor()} font-molle`}>
             {theme.content.activities.title}
           </h3>
@@ -64,8 +64,28 @@ const HomePage = () => {
             ))}
           </div>
         </div>
+      </div>
 
-
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-24 text-center">
+        {/* trophies */}
+        <div className="text-center">
+          <h3 className={`opacity-80 text-4xl md:text-5xl font-normal mb-4 transition-colors duration-500 text-${getTextColor()} font-molle`}>
+            {theme.content.trophies.title}
+          </h3>
+          <p className={`text-xl md:text-2xl font-semibold mb-8 max-w-3xl transition-colors duration-500 text-${getTextSecondaryColor()}`}>
+            {theme.content.trophies.description}
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-8 mt-12">
+          {theme.content.trophies.features.map((feature, index) => (
+            <div key={index} className={`${getCardClasses()} transition-all duration-500 backdrop-blur-sm bg-white/10 border-white/20`}>
+              <div className="text-4xl mb-4">{feature.icon}</div>
+              <h3 className={`text-xl font-semibold mb-2 transition-colors duration-500 text-${getTextColor()}`}>
+                {feature.title}
+              </h3>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
