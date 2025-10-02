@@ -5,6 +5,9 @@
 - TailwindCss
 
 ## Features
+## Changement de thème visuel
+- Offre un affichage avec des couleurs différentes
+
 ### Homepage
 - Affiche un message de bienvenue
 
