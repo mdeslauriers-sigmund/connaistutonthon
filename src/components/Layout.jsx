@@ -18,6 +18,13 @@ const Layout = ({ children }) => {
             </Link>
             
             <div className="flex items-center space-x-4">
+              <Link
+                to="/achievements"
+                className={`text-lg transition-colors duration-300 text-${getTextColor()} hover:text-${getTextSecondaryColor()}`}
+                title="Voir mes achievements"
+              >
+                🏆
+              </Link>
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ export const taonTheme = {
         {
           id: 0,
           season: 'printemps',
-          correctAnswer: { x: 50, y: 30 },
+          correctAnswer: { area: 'mediterranean-sea' },
           explanation: 'Au printemps, les taons sortent de leur hibernation et se dirigent vers les zones tempérées où les premières fleurs apparaissent.',
           successMessage: 'Parfait ! Au printemps, les taons cherchent les premières fleurs dans les zones tempérées.',
           failureMessage: 'Pas tout à fait ! Au printemps, les taons préfèrent les zones tempérées avec les premières fleurs.'
@@ -53,7 +53,7 @@ export const taonTheme = {
         {
           id: 1,
           season: 'été',
-          correctAnswer: { x: 70, y: 50 },
+          correctAnswer: { area: 'mexico-golfe' },
           explanation: 'En été, les taons migrent vers les régions plus chaudes et ensoleillées où la végétation est abondante et les fleurs nombreuses.',
           successMessage: 'Excellent ! En été, les taons se dirigent vers les régions chaudes et fleuries.',
           failureMessage: 'Pas correct ! En été, les taons préfèrent les régions chaudes avec beaucoup de fleurs.'
